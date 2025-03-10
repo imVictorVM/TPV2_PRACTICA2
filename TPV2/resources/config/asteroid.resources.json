@@ -1,0 +1,102 @@
+{
+
+    "fonts": [
+        {
+            "id": "ARIAL16",
+            "file": "resources/fonts/ARIAL.ttf",
+            "size": 16
+        },
+        {
+            "id": "ARIAL24",
+            "file": "resources/fonts/ARIAL.ttf",
+            "size": 24
+        }
+    ],
+
+    "images": [
+        {
+            "id": "fighter",
+            "file":  "resources/images/fighter.png"
+        },
+        {
+            "id": "fire_figther",
+            "file": "resources/images/fire.png"
+        },
+        {
+            "id": "heart_figther",
+            "file": "resources/images/heart.png"
+        },
+        {
+            "id": "asteroid",
+            "file": "resources/images/asteroid.png"
+        },
+        {
+            "id": "asteroid_gold",
+            "file": "resources/images/asteroid_gold.png"
+        }
+    ],
+
+    "messages": [
+        {
+            "id": "start",
+            "text": "Press space to start",
+            "font": "ARIAL24",
+            "color": "0x441155ff"
+        },
+        {
+            "id": "continue",
+            "text": "Press space to continue",
+            "font": "ARIAL24",
+            "color": "0x112233ff",
+            "bg": "0xffffffff"
+        },
+        {
+            "id": "gameover",
+            "text": "Game Over",
+            "font": "ARIAL24",
+            "color": "0x0000ffff"
+        },
+        {
+            "id": "NewGameAsteroids",
+            "text": "press any key to start a new game",
+            "font": "ARIAL24",
+            "color": "0x0000ffff"
+        },
+        {
+            "id": "NewRoundAsteroids",
+            "text": "press ENTER to start the round",
+            "font": "ARIAL24",
+            "color": "0x0000ffff"
+        },
+        {
+            "id": "PauseAsteroids",
+            "text": "press any key to resume the game",
+            "font": "ARIAL24",
+            "color": "0x0000ffff"
+        },
+        {
+            "id": "GameOverLoseAsteroids",
+            "text": "Game Over Loser! Press ENTER to continue",
+            "font": "ARIAL24",
+            "color": "0x0000ffff"
+        },
+        {
+            "id": "GameOverWinAsteroids",
+            "text": "Game Over Champion! Press ENTER to continue",
+            "font": "ARIAL24",
+            "color": "0x0000ffff"
+        }
+    ],
+
+    "sounds": [
+        {
+            "id": "ship_acceleration",
+            "file": "resources/sound/thrust.wav"
+        },
+        {
+            "id": "ship_shoot",
+            "file": "resources/sound/gunshot.wav"
+        }
+    ]
+
+}

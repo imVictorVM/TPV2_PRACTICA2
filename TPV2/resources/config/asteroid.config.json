@@ -1,0 +1,15 @@
+{
+    "asteroids" : 
+    {
+        "numAsteroids" : 10,
+        "frequency" : 5000.0,
+        "numSplitAsteroids" : 2
+    },
+
+    "fighter" :
+    {
+        "speed" : 3.5,
+        "speedRotation" : 3.0,
+        "gunReloadTime" : 250.0 
+    }
+}
