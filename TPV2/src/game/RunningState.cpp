@@ -5,8 +5,6 @@
 #include "../game/Game.h"
 #include "../sdlutils/SDLUtils.h"
 
-#include "FigtherUtils.h"
-
 #include "../sdlutils/Texture.h"
 
 #include "../components/Health.h"
@@ -14,8 +12,6 @@
 #include "../utils/Collisions.h"
 
 #include "../components/Transform.h"
-
-#include "../components/Gun.h"
 #include "../game/ConfigAsteroids.h"
 
 RunningState::RunningState()
@@ -41,71 +37,71 @@ void RunningState::update()
 	std::cout << sdlutils().virtualTimer().currTime() << std::endl;
 
 	auto& inputHandler = ih();
-	auto manager = Game::Instance()->getManager();
-	auto ship = Game::Instance()->getFigther();
+	//auto manager = Game::Instance()->getManager();
+	//auto ship = Game::Instance()->getFigther();
 
-	if (manager->getEntities(ecs::grp::ASTEROIDS).size() == 0 || 
-		manager->getComponent<Health>(ship)->checkLives() == 0) 
-	{
-		Game::Instance()->setState(Game::GAMEOVER);
-	}
-
-
-	if (inputHandler.keyDownEvent() && inputHandler.isKeyDown(SDL_SCANCODE_P)) {
-		Game::Instance()->setState(Game::PAUSED);
-	}
+	//if (manager->getEntities(ecs::grp::ASTEROIDS).size() == 0 || 
+	//	manager->getComponent<Health>(ship)->checkLives() == 0) 
+	//{
+	//	Game::Instance()->setState(Game::GAMEOVER);
+	//}
+	//
+	//
+	//if (inputHandler.keyDownEvent() && inputHandler.isKeyDown(SDL_SCANCODE_P)) {
+	//	Game::Instance()->setState(Game::PAUSED);
+	//}
 
 	sdlutils().clearRenderer();
 
-	manager->update();
+	//manager->update();
 
-	auto shipPos = manager->getComponent<Transform>(ship)->getPos();
-	auto shipWidth = manager->getComponent<Transform>(ship)->getWidth();
-	auto shipHeight = manager->getComponent<Transform>(ship)->getHeight();
-	auto shipRot = manager->getComponent<Transform>(ship)->getRot();
+	//auto shipPos = manager->getComponent<Transform>(ship)->getPos();
+	//auto shipWidth = manager->getComponent<Transform>(ship)->getWidth();
+	//auto shipHeight = manager->getComponent<Transform>(ship)->getHeight();
+	//auto shipRot = manager->getComponent<Transform>(ship)->getRot();
 
 	//COLISIONES
 	/*const Vector2D &o1Pos, float o1Width,
 		float o1Height, float o1Rot, const Vector2D &o2Pos, float o2Width,
 		float o2Height, float o2Rot*/
 
-	for (int i = 0; i < manager->getEntities(ecs::grp::ASTEROIDS).size(); ++i) {
-		auto asteroid = manager->getEntities(ecs::grp::ASTEROIDS)[i];
-		auto astPos = manager->getComponent<Transform>(asteroid)->getPos();
-		auto astWidth = manager->getComponent<Transform>(asteroid)->getWidth();
-		auto astHeight = manager->getComponent<Transform>(asteroid)->getHeight();
-		auto astRot = manager->getComponent<Transform>(asteroid)->getRot();
+	//for (int i = 0; i < manager->getEntities(ecs::grp::ASTEROIDS).size(); ++i) {
+	//	auto asteroid = manager->getEntities(ecs::grp::ASTEROIDS)[i];
+	//	auto astPos = manager->getComponent<Transform>(asteroid)->getPos();
+	//	auto astWidth = manager->getComponent<Transform>(asteroid)->getWidth();
+	//	auto astHeight = manager->getComponent<Transform>(asteroid)->getHeight();
+	//	auto astRot = manager->getComponent<Transform>(asteroid)->getRot();
+	//
+	//	for (auto i = manager->getComponent<Gun>(ship)->begin(); i != manager->getComponent<Gun>(ship)->end(); ++i) {
+	//		auto bulletPos = i->pos;
+	//		auto bulletWidth = i->width;
+	//		auto bulletHeight = i->height;
+	//		auto bulletRot = i->rot;
+	//
+	//		if (Collisions::collidesWithRotation(astPos, astWidth, astHeight, astRot, bulletPos, bulletWidth, bulletHeight, bulletRot)) {
+	//			Game::Instance()->getAsteroidsFacade()->split_asteroid(asteroid);
+	//			i->used = false;
+	//		}
+	//	}
+	//
+	//	if (Collisions::collidesWithRotation(shipPos, shipWidth, shipHeight, shipRot, astPos, astWidth, astHeight, astRot)) {
+	//		manager->getComponent<Health>(ship)->loseOneLive();
+	//		if (manager->getComponent<Health>(ship)->checkLives() > 0) Game::Instance()->setState(Game::NEWROUND);
+	//	}
+	//
+	//
+	//}
 
-		for (auto i = manager->getComponent<Gun>(ship)->begin(); i != manager->getComponent<Gun>(ship)->end(); ++i) {
-			auto bulletPos = i->pos;
-			auto bulletWidth = i->width;
-			auto bulletHeight = i->height;
-			auto bulletRot = i->rot;
+	//manager->render();
 
-			if (Collisions::collidesWithRotation(astPos, astWidth, astHeight, astRot, bulletPos, bulletWidth, bulletHeight, bulletRot)) {
-				Game::Instance()->getAsteroidsFacade()->split_asteroid(asteroid);
-				i->used = false;
-			}
-		}
-
-		if (Collisions::collidesWithRotation(shipPos, shipWidth, shipHeight, shipRot, astPos, astWidth, astHeight, astRot)) {
-			manager->getComponent<Health>(ship)->loseOneLive();
-			if (manager->getComponent<Health>(ship)->checkLives() > 0) Game::Instance()->setState(Game::NEWROUND);
-		}
-
-
-	}
-
-	manager->render();
-
-	manager->refresh();
+	//manager->refresh();
 
 	//GENERACION DE ASTEROIDE CADA 5 SEGS
 	//ARCHIVO CONFIG PARA EL TIEMPO DE ESPERA A GENERAR UN NUEVO ASTEROIDE
-	if (_timer + Game::Instance()->getConfigAsteroids()->frequencyAsteroids() <= sdlutils().virtualTimer().currTime()) {
-		_timer = sdlutils().virtualTimer().currTime();
-		Game::Instance()->getAsteroidsFacade()->create_asteroids(1);
-	}
+	//if (_timer + Game::Instance()->getConfigAsteroids()->frequencyAsteroids() <= sdlutils().virtualTimer().currTime()) {
+	//	_timer = sdlutils().virtualTimer().currTime();
+	//	Game::Instance()->getAsteroidsFacade()->create_asteroids(1);
+	//}
 
 	sdlutils().presentRenderer();
 

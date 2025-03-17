@@ -12,6 +12,7 @@
 #include "../systems/StarsSystem.h"
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
+#include "../game/NewGameState.h"
 
 using ecs::Manager;
 

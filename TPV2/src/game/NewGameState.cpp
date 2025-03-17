@@ -7,9 +7,6 @@
 #include "../sdlutils/SDLUtils.h"
 
 #include "../sdlutils/InputHandler.h"
-
-#include "FigtherUtils.h"
-
 #include "../game/ConfigAsteroids.h"
 
 NewGameState::NewGameState() :
@@ -31,8 +28,8 @@ void NewGameState::update(){
 	auto& inputHandler = ih();
 
 	if (inputHandler.keyDownEvent()) {
-		Game::Instance()->getFigtherFacade()->reset_lives();
-		Game::Instance()->setState(Game::NEWROUND);
+		//Game::Instance()->getFigtherFacade()->reset_lives();
+		//Game::Instance()->setState(Game::NEWROUND);
 	}
 
 	sdlutils().clearRenderer();

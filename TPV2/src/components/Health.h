@@ -9,12 +9,12 @@ class Texture;
 class Health : public ecs::Component {
 public:
 
-	__CMPID_DECL__(ecs::cmp::HEALTH)
+	//__CMPID_DECL__(ecs::cmp::HEALTH)
 
 	Health(int initialLives);
 	virtual ~Health();
 	void initComponent() override;
-	void render() override;
+	//void render() override;
 
 	void addOneLive();
 	void loseOneLive();

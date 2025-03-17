@@ -6,12 +6,42 @@
 
 #include "../ecs/ecs.h"
 
-class Game {
+#include "../utils/Singleton.h"
+
+#include "GameState.h"
+
+class Game : public Singleton<Game> {
+private:
+	friend class Singleton<Game>;
 public:
 	Game();
 	virtual ~Game();
 	void init();
 	void start();
+	enum State {
+		RUNNING, PAUSED, NEWGAME, NEWROUND, GAMEOVER
+	};
+	inline void setState(State s) {
+		_state->leave();
+		switch (s) {
+		case RUNNING:
+			_state = _running_state;
+			break;
+		case PAUSED:
+			_state = _paused_state;
+			break;
+		case NEWGAME:
+			_state = _newgame_state;
+			break;
+		case NEWROUND:
+			_state = _newround_state;
+			break;
+		case GAMEOVER:
+			_state = _gameover_state;
+			break;
+		}
+		_state->enter();
+	}
 private:
 	ecs::Manager *_mngr;
 	ecs::System *_pacmanSys;
@@ -19,5 +49,13 @@ private:
 	ecs::System *_startsSys;
 	ecs::System *_renderSys;
 	ecs::System *_collisionSys;
+	//ESTADOS
+	GameState* _state;
+	GameState* _paused_state;
+	GameState* _running_state;
+	GameState* _newgame_state;
+	GameState* _newround_state;
+	GameState* _gameover_state;
+
 };
 
