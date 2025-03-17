@@ -13,7 +13,10 @@
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
 #include "../game/NewGameState.h"
-
+#include "../game/NewRoundState.h"
+#include "../game/RunningState.h"
+#include "../game/PausedState.h"
+#include "../game/GameOverState.h"
 using ecs::Manager;
 
 Game::Game() :
@@ -22,7 +25,12 @@ Game::Game() :
 		_gameCtrlSys(), //
 		_startsSys(), //
 		_renderSys(), //
-		_collisionSys() {
+		_collisionSys(), //
+		_state(nullptr),
+		_newgame_state(nullptr),
+		_newround_state(nullptr),
+		_paused_state(nullptr),
+		_running_state(nullptr){
 
 }
 
@@ -60,12 +68,22 @@ void Game::init() {
 	// Create the manager
 	_mngr = new Manager();
 
-	// add the systems
+	//STATES
+	_newgame_state = new NewGameState();
+	_newround_state = new NewRoundState();
+	_running_state = new RunningState();
+	_paused_state = new PausedState();
+	_gameover_state = new GameOverState();
+	
+	//SYSTEMS
 	_pacmanSys = _mngr->addSystem<PacManSystem>();
 	_startsSys = _mngr->addSystem<StarsSystem>();
 	_gameCtrlSys = _mngr->addSystem<GameCtrlSystem>();
 	_renderSys = _mngr->addSystem<RenderSystem>();
 	_collisionSys = _mngr->addSystem<CollisionsSystem>();
+
+	_state = _newgame_state;
+	_state->enter();
 }
 
 void Game::start() {

@@ -44,6 +44,7 @@ public:
 	}
 private:
 	ecs::Manager *_mngr;
+	//SISTEMAS
 	ecs::System *_pacmanSys;
 	ecs::System *_gameCtrlSys;
 	ecs::System *_startsSys;
