@@ -2,45 +2,31 @@
 
 #include "Game.h"
 
+#include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
-
-#include "NewGameState.h"
-#include "NewRoundState.h"
-#include "PausedState.h"
-#include "RunningState.h"
-#include "GameOverState.h"
-
-#include "../game/ConfigAsteroids.h"
-
+#include "../systems/CollisionsSystem.h"
+#include "../systems/GameCtrlSystem.h"
+#include "../systems/PacManSystem.h"
+#include "../systems/RenderSystem.h"
+#include "../systems/StarsSystem.h"
+#include "../utils/Vector2D.h"
+#include "../utils/Collisions.h"
 
 using ecs::Manager;
 
 Game::Game() :
-	
-	_myFighterUtils(nullptr),
-	_state(nullptr),
-	_paused_State(nullptr),
-	_running_State(nullptr),
-	_newGame_State(nullptr),
-	_newRound_State(nullptr),
-	_gameOver_State(nullptr),
-	_myFigther(nullptr),
-	_config(nullptr)
-{
+		_mngr(), //
+		_pacmanSys(), //
+		_gameCtrlSys(), //
+		_startsSys(), //
+		_renderSys(), //
+		_collisionSys() {
+
 }
 
 Game::~Game() {
-
-	delete _paused_State;
-	delete _running_State;
-	delete _newGame_State;
-	delete _newRound_State;
-	delete _gameOver_State;
-
-	delete _myFighterUtils;
-	delete _myFigther;
-
+	delete _mngr;
 
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
@@ -51,53 +37,34 @@ Game::~Game() {
 		SDLUtils::Release();
 }
 
-bool Game::init() {
+void Game::init() {
 
 	// initialize the SDL singleton
-	if (!SDLUtils::Init("Asteroids", 800, 600,
-			"resources/config/asteroid.resources.json")) {
+	if (!SDLUtils::Init("PacMan, Stars, ...", 800, 600,
+			"resources/config/resources.json")) {
 
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
-		return false;
+		return;
 	}
 
 	// initialize the InputHandler singleton
 	if (!InputHandler::Init()) {
 		std::cerr << "Something went wrong while initializing SDLHandler"
 				<< std::endl;
-		return false;
+		return;
 
 	}
-	sdlutils().hideCursor();
 
-	return true;
-	
-
-}
-
-void Game::initGame(ConfigAsteroids& config)
-{
+	// Create the manager
 	_mngr = new Manager();
-	_config = &config;
 
-	_newGame_State = new NewGameState();
-	_newRound_State = new NewRoundState();
-	_paused_State = new PausedState();
-	_running_State = new RunningState();
-	_gameOver_State = new GameOverState();
-
-	_myFighterUtils = new FigtherUtils();
-	_myFighterUtils->create_figther();
-
-	_myFigther = _myFighterUtils->getShipEntity();
-	
-	//_AsteroidsUtils creation
-	_myAsteroidsUtils = new AsteroidsUtils(_myFigther);
-
-	_state = _newGame_State;
-
-	_state->enter();
+	// add the systems
+	_pacmanSys = _mngr->addSystem<PacManSystem>();
+	_startsSys = _mngr->addSystem<StarsSystem>();
+	_gameCtrlSys = _mngr->addSystem<GameCtrlSystem>();
+	_renderSys = _mngr->addSystem<RenderSystem>();
+	_collisionSys = _mngr->addSystem<CollisionsSystem>();
 }
 
 void Game::start() {
@@ -106,20 +73,9 @@ void Game::start() {
 	bool exit = false;
 
 	auto &ihdlr = ih();
-	auto& vt = sdlutils().virtualTimer();
-
-	// reset the time before starting - so we calculate correct
-	// delta-time in the first iteration
-	//
-	//sdlutils().resetTime();
-	vt.resetTime();
 
 	while (!exit) {
-		// store the current time -- all game objects should use this time when
-		// then need to the current time. They also have accessed to the time elapsed
-		// between the last two calls to regCurrTime().
-		//Uint32 startTime = sdlutils().regCurrTime();
-		Uint32 startTime = vt.regCurrTime();
+		Uint32 startTime = sdlutils().currRealTime();
 
 		// refresh the input handler
 		ihdlr.refresh();
@@ -129,14 +85,22 @@ void Game::start() {
 			continue;
 		}
 
-		
+		_pacmanSys->update();
+		_startsSys->update();
+		_gameCtrlSys->update();
+		_collisionSys->update();
 
-		_state->update();
+		_mngr->refresh();
 
+		sdlutils().clearRenderer();
+		_renderSys->update();
+		sdlutils().presentRenderer();
 
-		SDL_Delay(8);
+		Uint32 frameTime = sdlutils().currRealTime() - startTime;
+
+		if (frameTime < 10)
+			SDL_Delay(10 - frameTime);
 	}
 
 }
-
 

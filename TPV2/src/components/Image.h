@@ -3,27 +3,21 @@
 #pragma once
 #include "../ecs/Component.h"
 
-class Transform;
 class Texture;
 
-class Image: public ecs::Component {
-public:
+struct Image: public ecs::Component {
 
-	__CMPID_DECL__(ecs::cmp::IMAGE)
-
-	Image();
-	Image(Texture *tex);
-	virtual ~Image();
-
-	void setTexture(Texture *tex) {
-		_tex = tex;
+	Image() :
+			_tex() {
 	}
 
-	void initComponent() override;
-	void render() override;
+	Image(Texture *tex) :
+			_tex(tex) {
+	}
 
-private:
-	Transform *_tr;
+	virtual ~Image() {
+	}
+
 	Texture *_tex;
 };
 

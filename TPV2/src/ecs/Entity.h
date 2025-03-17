@@ -15,20 +15,13 @@ namespace ecs {
  * A struct that represents a collection of components.
  *
  */
-
 struct Entity {
 public:
 	Entity(grpId_t gId) :
-			//_mngr(mngr), //
 			_cmps(), //
-			_currCmps(), //
 			_alive(),  //
 			_gId(gId) //
 	{
-		// We reserve the a space for the maximum number of
-		// components. This way we avoid resizing the vector.
-		//
-		_currCmps.reserve(ecs::maxComponentId);
 	}
 
 	// we delete the copy constructor/assignment because it is
@@ -45,27 +38,27 @@ public:
 
 		// we delete all available components
 		//
-		for (auto c : _currCmps)
-			delete c;
+		for (auto i = 0u; i < maxComponentId; i++)
+			if (_cmps[i] != nullptr) {
+				delete _cmps[i];
+				_cmps[i] = nullptr;
+			}
 	}
-
-	// Returns the manager to which this entity belongs
-	//inline Manager* getMngr() {
-	//	return _mngr;
-	//}
 
 private:
 
-	// We could make the constructors private as well, so only
-	// the manager can create instances (because it is a friend)
+	// the field currCmps_ can be removed, and instead we can traverse cmps_
+	// and process non-null elements. We keep it because sometimes the order
+	// in which the components are executed is important
 
-	friend Manager; // so we can update these fields directly from the manager
+	friend Manager;
 
-	//Manager *_mngr;
+	// the list of components is not really needed when using systems,
+	// but for now we keep it just in case
+	//
 	std::array<Component*, maxComponentId> _cmps;
-	std::vector<Component*> _currCmps;
 	bool _alive;
-	grpId_t _gId;
+	ecs::grpId_t _gId;
 };
 
 } // end of name space

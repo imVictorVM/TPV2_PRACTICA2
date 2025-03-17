@@ -4,18 +4,12 @@
 
 #include "game/Game.h"
 
-#include "game/ConfigAsteroids.h"
-
 int main(int, char**) {
 
 	try {
-
-		ConfigAsteroids config("resources/config/asteroid.config.json");
-		if (Game::Init()) {
-			Game::Instance()->initGame(config);
-			Game::Instance()->start();
-		}
-		Game::Release();
+		Game g;
+		g.init();
+		g.start();
 	} catch (const std::string &e) { // catch exceptions thrown as strings
 		std::cerr << e << std::endl;
 	} catch (const char *e) { // catch exceptions thrown as char*

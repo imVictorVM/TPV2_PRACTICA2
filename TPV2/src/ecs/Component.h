@@ -7,17 +7,20 @@
 namespace ecs {
 
 /*
- * Classes that inherit from Component must define a field
+ * Structs that inherit from Component must define a field
  *
- *   	constexpr static ecs::cmpId_type id = value;
+ *   	constexpr static ecs::cmpId_t id = value;
  *
  * where value is from the enum ecs::cmpId (see ecs.h). This
  * how we assign numeric identifiers to components (so we can
  * easily put them in an array). The list of possible identifiers
  * is defined as an enum in ecs.h
  *
+ * We use a struct to emphasise that it is actually a data structure
+ * in ECS, and also to have default visibility as public.
+ * *
  */
-class Component {
+struct Component {
 public:
 	Component() :
 			_ent() //
@@ -25,43 +28,36 @@ public:
 	}
 
 	// Destroys the component.
-	// Careful! ent_ and mngr_ should not be destroyed
+	// Careful! _ent not be destroyed
 	//
 	virtual ~Component() {
 	}
 
 	// This method is used to set the context, which is a
 	// reference to the entity in which the component is
-	// installed. It will be called by Manager when adding
-	// a component.
+	// installed.
 	//
 	inline void setContext(Entity *ent) {
 		_ent = ent;
 	}
 
 	// We assume that initComponent will be called when adding a
-	// component to an entity, immediately after setContext.
+	// component to an entity, immediately after setContext. It is not
+	// use much in ECS
 	//
 	virtual void initComponent() {
 	}
 
-	// A component has an update method, and by default it
-	// does nothing -- some components will not override this
-	// method.
+
+protected:
 	//
-	virtual void update() {
-	}
 
-	// A component has a render method, and by default it
-	// does nothing -- some components will not override this
-	// method.
-	//
-	virtual void render() {
-	}
+	// a reference to the entity, should not be deleted on destruction.
+	// having a reference to the entity is sometimes useful if we have a
+	// reference to a component and wants to retrieve another component
+	// of the same entity. Can be removed as well!
 
-protected: // we allow direct use these fields from subclasses
-
-	Entity *_ent; // a pointer to the entity, should not be deleted on destruction
+	entity_t _ent;
 };
 
 } // end of namespace
