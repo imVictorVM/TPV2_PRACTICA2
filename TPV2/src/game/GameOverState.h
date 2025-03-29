@@ -10,7 +10,5 @@ public:
 	void leave() override;
 	void update() override;
 private:
-	Texture& _msgWin;
-	Texture& _msgLose;
-	bool win;
+	Texture& _msg;
 };

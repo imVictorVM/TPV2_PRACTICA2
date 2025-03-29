@@ -44,9 +44,21 @@ Game::~Game() {
 	// release SLDUtil if the instance was created correctly.
 	if (SDLUtils::HasInstance())
 		SDLUtils::Release();
+
+	delete _newgame_state;
+	delete _newround_state;
+	delete _running_state;
+	delete _paused_state;
+	delete _gameover_state;
+
+	//delete _pacmanSys;
+	//delete _startsSys;
+	//delete _gameCtrlSys;
+	//delete _renderSys;
+	//delete _collisionSys;
 }
 
-void Game::init() {
+bool Game::init() {
 
 	// initialize the SDL singleton
 	if (!SDLUtils::Init("PacMan, Stars, ...", 800, 600,
@@ -54,18 +66,22 @@ void Game::init() {
 
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
-		return;
+		return false;
 	}
 
 	// initialize the InputHandler singleton
 	if (!InputHandler::Init()) {
 		std::cerr << "Something went wrong while initializing SDLHandler"
 				<< std::endl;
-		return;
+		return false;
 
 	}
 
-	// Create the manager
+	return true;
+}
+
+void Game::initGame()
+{
 	_mngr = new Manager();
 
 	//STATES
@@ -74,7 +90,7 @@ void Game::init() {
 	_running_state = new RunningState();
 	_paused_state = new PausedState();
 	_gameover_state = new GameOverState();
-	
+
 	//SYSTEMS
 	_pacmanSys = _mngr->addSystem<PacManSystem>();
 	_startsSys = _mngr->addSystem<StarsSystem>();
@@ -104,16 +120,10 @@ void Game::start() {
 			continue;
 		}
 
-		_pacmanSys->update();
-		_startsSys->update();
-		_gameCtrlSys->update();
-		_collisionSys->update();
+		//UPDATE DEL ESTADO (si usamos el mecanismo de enviar mensajes con retraso)
+		_state->update();
 
-		_mngr->refresh();
-
-		sdlutils().clearRenderer();
-		_renderSys->update();
-		sdlutils().presentRenderer();
+		//FLUSHMESSAGES
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 

@@ -13,6 +13,13 @@
 
 #include "../components/Transform.h"
 #include "../game/ConfigAsteroids.h"
+#include "../systems/CollisionsSystem.h"
+#include "../systems/GameCtrlSystem.h"
+#include "../systems/PacManSystem.h"
+#include "../systems/RenderSystem.h"
+#include "../systems/StarsSystem.h"
+#include "../ecs/Manager.h"
+
 
 RunningState::RunningState()
 {
@@ -47,11 +54,30 @@ void RunningState::update()
 	//}
 	//
 	//
-	//if (inputHandler.keyDownEvent() && inputHandler.isKeyDown(SDL_SCANCODE_P)) {
-	//	Game::Instance()->setState(Game::PAUSED);
-	//}
+	if (inputHandler.keyDownEvent() && inputHandler.isKeyDown(SDL_SCANCODE_P)) {
+		Game::Instance()->setState(Game::PAUSED);
+	}
+
+	//sdlutils().clearRenderer();
+
+	//_pacmanSys->update();
+	Game::Instance()->getPacmanSys()->update();
+	//_startsSys->update();
+	Game::Instance()->getstartsSys()->update();
+	//_gameCtrlSys->update();
+	Game::Instance()->getgameCtrlSys()->update();
+	//_collisionSys->update();
+	Game::Instance()->getcollisionSys()->update();
+	
+	//_mngr->refresh();
+	Game::Instance()->getManager()->refresh();
 
 	sdlutils().clearRenderer();
+	
+	//_renderSys->update();
+	Game::Instance()->getrenderSys()->update();
+	
+	sdlutils().presentRenderer();
 
 	//manager->update();
 
@@ -103,7 +129,7 @@ void RunningState::update()
 	//	Game::Instance()->getAsteroidsFacade()->create_asteroids(1);
 	//}
 
-	sdlutils().presentRenderer();
+	//sdlutils().presentRenderer();
 
 
 

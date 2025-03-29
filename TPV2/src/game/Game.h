@@ -13,10 +13,11 @@
 class Game : public Singleton<Game> {
 private:
 	friend class Singleton<Game>;
-public:
 	Game();
+	bool init();
+public:
+	void initGame();
 	virtual ~Game();
-	void init();
 	void start();
 	enum State {
 		RUNNING, PAUSED, NEWGAME, NEWROUND, GAMEOVER
@@ -42,6 +43,13 @@ public:
 		}
 		_state->enter();
 	}
+	ecs::System* getPacmanSys() { return _pacmanSys; }
+	ecs::System* getgameCtrlSys() { return _gameCtrlSys; }
+	ecs::System* getstartsSys() { return _startsSys; }
+	ecs::System* getrenderSys() { return _renderSys; }
+	ecs::System* getcollisionSys() { return _collisionSys; }
+	
+	ecs::Manager* getManager() { return _mngr; }
 private:
 	ecs::Manager *_mngr;
 	//SISTEMAS

@@ -13,7 +13,7 @@
 
 
 NewRoundState::NewRoundState() :
-	_msg(sdlutils().msgs().at("NewRoundAsteroids"))
+	_msg(sdlutils().msgs().at("NewRoundStatePacman"))
 {
 }
 

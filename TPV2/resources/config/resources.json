@@ -20,7 +20,13 @@
     { "id" : "paused", "text" : "Press any key to continue", "font" : "ARIAL24", "color" : "0xffffffff" },
     { "id" : "newgame", "text" : "Press any key to start a new Game", "font" : "ARIAL24", "color" : "0x0000ffff" },
     { "id" : "newround", "text" : "Press ENTER to start a new Round", "font" : "ARIAL24", "color" : "0xffffffff" },
-    { "id" : "gameover", "text" : "GAME OVER", "font" : "ARIAL24", "color" : "0xff0000ff" }
+    { "id" : "gameover", "text" : "GAME OVER", "font" : "ARIAL24", "color" : "0xff0000ff" },
+    
+    { "id" : "NewGameStatePacman", "text" : "Press Any Key to Start a New Game", "font" : "ARIAL24", "color" : "0xff0000ff" },
+    { "id" : "NewRoundStatePacman", "text" : "Press Enter to Start a New Round", "font" : "ARIAL24", "color" : "0xff0000ff" },
+    { "id" : "PauseStatePacman", "text" : "Press Any Key to Continue", "font" : "ARIAL24", "color" : "0xff0000ff" },
+    { "id" : "GameOverStatePacman", "text" : "GAME OVER", "font" : "ARIAL24", "color" : "0xff0000ff" }
+
   ],
 
     "sounds": [

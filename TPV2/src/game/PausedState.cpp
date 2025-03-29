@@ -7,7 +7,7 @@
 #include "../sdlutils/InputHandler.h"
 
 PausedState::PausedState() :
-	_msg(sdlutils().msgs().at("PauseAsteroids"))
+	_msg(sdlutils().msgs().at("PauseStatePacman"))
 {
 }
 

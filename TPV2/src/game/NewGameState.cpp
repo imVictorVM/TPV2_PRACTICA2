@@ -10,7 +10,7 @@
 #include "../game/ConfigAsteroids.h"
 
 NewGameState::NewGameState() :
-	_msg(sdlutils().msgs().at("NewGameAsteroids")) 
+	_msg(sdlutils().msgs().at("NewGameStatePacman")) 
 {
 }
 
@@ -29,7 +29,7 @@ void NewGameState::update(){
 
 	if (inputHandler.keyDownEvent()) {
 		//Game::Instance()->getFigtherFacade()->reset_lives();
-		//Game::Instance()->setState(Game::NEWROUND);
+		Game::Instance()->setState(Game::NEWROUND);
 	}
 
 	sdlutils().clearRenderer();
