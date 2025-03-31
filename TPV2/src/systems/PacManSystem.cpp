@@ -7,9 +7,12 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../sdlutils/Texture.h"
+#include "../components/ImageWithFrames.h"
+
 
 PacManSystem::PacManSystem() :
-		_pmTR(nullptr) {
+		_pmTR(nullptr), _pmIWF(nullptr), _tex(nullptr), _timer(0) {
 }
 
 PacManSystem::~PacManSystem() {
@@ -21,12 +24,15 @@ void PacManSystem::initSystem() {
 	auto pacman = _mngr->addEntity();
 	_mngr->setHandler(ecs::hdlr::PACMAN, pacman);
 
+
 	_pmTR = _mngr->addComponent<Transform>(pacman);
 	auto s = 50.0f;
 	auto x = (sdlutils().width() - s) / 2.0f;
 	auto y = (sdlutils().height() - s) / 2.0f;
 	_pmTR->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
-	_mngr->addComponent<Image>(pacman, &sdlutils().images().at("pacman"));
+
+	_pmIWF = _mngr->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("pacman"),s,s,0,0,4);
+
 }
 
 void PacManSystem::update() {
@@ -68,6 +74,11 @@ void PacManSystem::update() {
 	} else if (_pmTR->_pos.getY() + _pmTR->_height > sdlutils().height()) {
 		_pmTR->_pos.setY(sdlutils().height() - _pmTR->_height);
 		_pmTR->_vel.set(0.0f, 0.0f);
+	}
+
+	if (_timer + 50 <= sdlutils().virtualTimer().currTime()) {
+		_timer = sdlutils().virtualTimer().currTime();
+		_pmIWF->updateImage();
 	}
 
 	//auto &ihldr = ih();

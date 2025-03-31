@@ -4,7 +4,11 @@
 
 #include "../ecs/System.h"
 
+#include "../utils/Vector2D.h"
+
 struct Transform;
+class Texture;
+class ImageWithFrames;
 
 class PacManSystem: public ecs::System {
 public:
@@ -15,5 +19,9 @@ public:
 	void update() override;
 private:
 	Transform *_pmTR;
+	ImageWithFrames* _pmIWF;
+	Texture* _tex;
+	Vector2D _actFrame;
+	float _timer;
 };
 

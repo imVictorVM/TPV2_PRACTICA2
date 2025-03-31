@@ -8,10 +8,8 @@ class Texture;
 class ImageWithFrames : public ecs::Component {
 public:
 
-	__CMPID_DECL__(ecs::cmp::IMAGEWITHFRAMES)
-
 	ImageWithFrames();
-	ImageWithFrames(Texture* tex, float width, float height);
+	ImageWithFrames(Texture* tex, float width, float height, int fil, int col, int numFrames);
 	virtual ~ImageWithFrames();
 
 	void setTexture(Texture* tex) {
@@ -19,8 +17,8 @@ public:
 	}
 
 	void initComponent() override;
-	void render() override;
-	void update() override;
+	//void update() override;
+	void updateImage();
 private:
 	Transform* _tr;
 	Texture* _tex;
@@ -33,6 +31,11 @@ private:
 	float _texWidthMax;
 	float _texHeigthMax;
 
+
 	float _timer;
+	int _initialFil;
+	int _initialCol;
+	int _numFrames;
+	int _actualFrame;
 };
 
