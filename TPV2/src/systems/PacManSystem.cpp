@@ -32,7 +32,7 @@ void PacManSystem::initSystem() {
 	_pmTR->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
 
 	_timer = 0;
-	_pmIWF = _mngr->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("pacman"),s,s,0,0,4);
+	_pmIWF = _mngr->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("sprites"),s,s,0,0,4);
 
 }
 
@@ -77,6 +77,7 @@ void PacManSystem::update() {
 		_pmTR->_vel.set(0.0f, 0.0f);
 	}
 
+	std::cout << sdlutils().virtualTimer().currTime() << std::endl;
 	if (_timer + 50 <= sdlutils().virtualTimer().currTime()) {
 		_timer = sdlutils().virtualTimer().currTime();
 		_pmIWF->updateImage();

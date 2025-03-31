@@ -43,7 +43,9 @@ void RunningState::leave()
 void RunningState::update()
 {
 
-	std::cout << sdlutils().virtualTimer().currTime() << std::endl;
+	//std::cout << sdlutils().virtualTimer().currTime() << std::endl;
+	sdlutils().virtualTimer().regCurrTime();
+
 
 	auto& inputHandler = ih();
 	//auto manager = Game::Instance()->getManager();
