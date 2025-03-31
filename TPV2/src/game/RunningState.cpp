@@ -17,7 +17,9 @@
 #include "../systems/GameCtrlSystem.h"
 #include "../systems/PacManSystem.h"
 #include "../systems/RenderSystem.h"
-#include "../systems/StarsSystem.h"
+
+#include "../systems/FoodSystem.h"
+
 #include "../ecs/Manager.h"
 
 
@@ -63,7 +65,7 @@ void RunningState::update()
 	//_pacmanSys->update();
 	Game::Instance()->getPacmanSys()->update();
 	//_startsSys->update();
-	Game::Instance()->getstartsSys()->update();
+	Game::Instance()->getFoodSys()->update();
 	//_gameCtrlSys->update();
 	Game::Instance()->getgameCtrlSys()->update();
 	//_collisionSys->update();

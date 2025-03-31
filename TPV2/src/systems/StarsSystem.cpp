@@ -1,5 +1,5 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
-
+/*
 #include "StarsSystem.h"
 
 #include <algorithm>
@@ -114,3 +114,4 @@ void StarsSystem::recieve(const Message &m) {
 		break;
 	}
 }
+*/

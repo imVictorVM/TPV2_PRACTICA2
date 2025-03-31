@@ -27,14 +27,14 @@ struct Points;
 
 // Systems list - must have at least one element
 //
-class StarsSystem;
+class FoodSystem;
 class RenderSystem;
 class PacManSystem;
 class GameCtrlSystem;
 class CollisionsSystem;
 
 #define _SYS_LIST_ \
-    StarsSystem, \
+    FoodSystem, \
 	RenderSystem, \
 	PacManSystem, \
 	GameCtrlSystem, \
