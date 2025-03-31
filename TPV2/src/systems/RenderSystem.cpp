@@ -3,6 +3,8 @@
 #include "RenderSystem.h"
 
 #include "../components/Image.h"
+
+#include "../components/ImageWithFrames.h"
 #include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/macros.h"
@@ -39,7 +41,8 @@ void RenderSystem::drawStars() {
 void RenderSystem::drawPacMan() {
 	auto e = _mngr->getHandler(ecs::hdlr::PACMAN);
 	auto tr = _mngr->getComponent<Transform>(e);
-	auto tex = _mngr->getComponent<Image>(e)->_tex;
+	//auto tex = _mngr->getComponent<Image>(e)->_tex;
+	auto tex = _mngr->getComponent<ImageWithFrames>(e)->getTexture();
 	draw(tr, tex);
 
 }

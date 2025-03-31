@@ -16,6 +16,10 @@ public:
 		_tex = tex;
 	}
 
+	Texture* getTexture() {
+		return _tex;
+	}
+
 	void initComponent() override;
 	//void update() override;
 	void updateImage();

@@ -31,6 +31,7 @@ void PacManSystem::initSystem() {
 	auto y = (sdlutils().height() - s) / 2.0f;
 	_pmTR->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
 
+	_timer = 0;
 	_pmIWF = _mngr->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("pacman"),s,s,0,0,4);
 
 }
