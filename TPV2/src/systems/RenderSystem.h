@@ -4,6 +4,7 @@
 #include "../ecs/System.h"
 
 class Texture;
+class Vector2D;
 struct Transform;
 
 class RenderSystem: public ecs::System {
@@ -17,6 +18,6 @@ private:
 	void drawStars();
 	void drawPacMan();
 	void drawMsgs();
-	void draw(Transform *tr, Texture *tex);
+	void draw(Transform *tr, Texture *tex, Vector2D actFrame);
 };
 

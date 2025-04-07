@@ -33,8 +33,9 @@ void RenderSystem::drawStars() {
 	for (auto e : _mngr->getEntities(ecs::grp::STARS)) {
 
 		auto tr = _mngr->getComponent<Transform>(e);
-		auto tex = _mngr->getComponent<Image>(e)->_tex;
-		draw(tr, tex);
+		auto IWF = _mngr->getComponent<ImageWithFrames>(e);
+		auto tex = IWF->getTexture();
+		draw(tr,tex,IWF->getActFrame());
 	}
 }
 
@@ -42,9 +43,12 @@ void RenderSystem::drawPacMan() {
 	auto e = _mngr->getHandler(ecs::hdlr::PACMAN);
 	auto tr = _mngr->getComponent<Transform>(e);
 	//auto tex = _mngr->getComponent<Image>(e)->_tex;
-	auto tex = _mngr->getComponent<ImageWithFrames>(e)->getTexture();
-	draw(tr, tex);
+	auto IWF = _mngr->getComponent<ImageWithFrames>(e);
+	auto tex = IWF->getTexture();
+	Vector2D actFrame = IWF->getActFrame();
 
+	assert(tex != nullptr);
+	draw(tr,tex,IWF->getActFrame());
 }
 
 
@@ -69,9 +73,9 @@ void RenderSystem::drawMsgs() {
 
 }
 
-void RenderSystem::draw(Transform *tr, Texture *tex) {
+void RenderSystem::draw(Transform *tr, Texture *tex, Vector2D actFrame) {
+	SDL_Rect frame = build_sdlrect(actFrame, tex->width()/8.0f, tex->height()/8.0f);
 	SDL_Rect dest = build_sdlrect(tr->_pos, tr->_width, tr->_height);
-
 	assert(tex != nullptr);
-	tex->render(dest, tr->_rot);
+	tex->render(frame,dest,tr->_rot);
 }

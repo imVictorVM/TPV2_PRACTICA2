@@ -8,6 +8,7 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "GameCtrlSystem.h"
+#include "../components/ImageWithFrames.h"
 
 FoodSystem::FoodSystem() : _currNumOfFood(0) {
 }
@@ -37,7 +38,8 @@ void FoodSystem::addFood(unsigned int n) {
 			tr->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
 
 			// add an Image Component
-			_mngr->addComponent<Image>(e, &sdlutils().images().at("star"));
+			//_mngr->addComponent<Image>(e, &sdlutils().images().at("star"));
+			_mngr->addComponent<ImageWithFrames>(e, &sdlutils().images().at("sprites"),s,s,4,1,0);
 
 			auto pts = _mngr->addComponent<Points>(e);
 			pts->_points = 5;

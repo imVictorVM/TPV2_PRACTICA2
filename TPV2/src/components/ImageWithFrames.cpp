@@ -14,15 +14,18 @@ ImageWithFrames::ImageWithFrames() :
 }
 
 ImageWithFrames::ImageWithFrames(Texture* tex, float width, float height, int fil, int col, int numFrames) :
-	_tr(), _tex(tex), _width(width), _height(height){
+	_tr(), _tex(tex){
 	_texWidthMax = _tex->width();
 	_texHeigthMax = _tex->height();
-	_actFrame = Vector2D(fil, col);
+	_width = (_tex->width() / 8);
+	_height = (_tex->height() / 8);
 	_timer = 0;
 	_numFrames = numFrames;
 	_actualFrame = 0;
 	_initialFil = fil;
 	_initialCol = col;
+	_reverseAnimation = false;
+	_actFrame = Vector2D(_initialFil*(_texWidthMax/8),_initialCol*(_texHeigthMax/8));
 }
 
 ImageWithFrames::~ImageWithFrames() {
@@ -33,14 +36,6 @@ void ImageWithFrames::initComponent() {
 	auto mngr = Game::Instance()->getManager();
 	_tr = mngr->getComponent<Transform>(_ent);
 	assert(_tr != nullptr);
-
-	SDL_Rect dest = build_sdlrect(_tr->_pos, _tr->_width,
-		_tr->_height);
-
-	SDL_Rect frame = build_sdlrect(_actFrame, _width, _height);
-
-	assert(_tex != nullptr);
-	_tex->render(frame, dest, 0);
 }
 
 
@@ -74,16 +69,22 @@ void ImageWithFrames::initComponent() {
 
 void ImageWithFrames::updateImage() {
 
+
 	if (_actualFrame < _numFrames) {
 		if (_actFrame.getX() + _width < _texWidthMax) {
-			_actFrame.setX(_actFrame.getX() + _width);
+			if (!_reverseAnimation) _actFrame.setX(_actFrame.getX() + _width);
+			else _actFrame.setX(_actFrame.getX() - _width);
 		}
 		else if (_actFrame.getY() + _height < _texHeigthMax) {
 			_actFrame.setX(0);
 			_actFrame.setY(_actFrame.getY() + _height);
 		}
-		else {
-			_actFrame.set(_initialFil, _initialCol);
-		}
+		_actualFrame++;
 	}
+	else {
+		_actualFrame = 0;
+		_reverseAnimation = !_reverseAnimation;
+	}
+
+
 }

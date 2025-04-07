@@ -20,6 +20,10 @@ public:
 		return _tex;
 	}
 
+	Vector2D getActFrame() {
+		return _actFrame;
+	}
+
 	void initComponent() override;
 	//void update() override;
 	void updateImage();
@@ -41,5 +45,7 @@ private:
 	int _initialCol;
 	int _numFrames;
 	int _actualFrame;
+
+	bool _reverseAnimation;
 };
 
