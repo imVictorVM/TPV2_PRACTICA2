@@ -27,3 +27,12 @@ void GhostSystem::initSystem()
 void GhostSystem::update()
 {
 }
+
+void GhostSystem::recieve(const Message& m)
+{
+	switch (m.id) {
+	case _m_IMMUNITY_END: //ACABA LA INMUNIDAD
+		//LLAMADA A FUNCION ESPECIFICA DEL PROPIO SISTEMA
+		break;
+	}
+}
