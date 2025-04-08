@@ -17,15 +17,15 @@ ImageWithFrames::ImageWithFrames(Texture* tex, float width, float height, int fi
 	_tr(), _tex(tex){
 	_texWidthMax = _tex->width();
 	_texHeigthMax = _tex->height();
-	_width = (_tex->width() / 8);
-	_height = (_tex->height() / 8);
+	_width = (_tex->width() / 8.0f);
+	_height = (_tex->height() / 8.0f);
 	_timer = 0;
 	_numFrames = numFrames;
 	_actualFrame = 0;
 	_initialFil = fil;
 	_initialCol = col;
 	_reverseAnimation = false;
-	_actFrame = Vector2D(_initialFil*(_texWidthMax/8),_initialCol*(_texHeigthMax/8));
+	_actFrame = Vector2D(_initialFil*(_texWidthMax/8.0f),_initialCol*(_texHeigthMax/8.0f));
 }
 
 ImageWithFrames::~ImageWithFrames() {

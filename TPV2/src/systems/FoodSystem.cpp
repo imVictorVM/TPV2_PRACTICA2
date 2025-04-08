@@ -118,6 +118,7 @@ void FoodSystem::onFoodEaten(ecs::entity_t e) {
 
     //play sound on channel 1 (if there is something playing there
     // it will be cancelled
+    sdlutils().soundEffects().at("pacman_eat").setVolume(16);
     sdlutils().soundEffects().at("pacman_eat").play(0, 1);
 }
 

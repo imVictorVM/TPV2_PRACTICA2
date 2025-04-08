@@ -10,10 +10,11 @@ class Vector2D;
 class GhostSystem : public ecs::System {
 public:
 
-	GhostSystem(int numGhosts);
+	GhostSystem();
 	virtual ~GhostSystem();
 	void initSystem() override;
 	void update() override;
+	void generateOneGhost();
 	//voids para mensajes recibidos
 	void killAllGhosts();
 	//
@@ -22,6 +23,7 @@ public:
 private:
 	std::vector<ecs::entity_t> _ghosts;
 	int _numGhosts;
-	Transform* _pmTR;
-	float _timer;
+	std::vector<Transform*> _ghTR;
+	float _timerAnimation;
+	float _timerSpawn;
 };
