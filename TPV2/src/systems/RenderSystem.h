@@ -16,6 +16,7 @@ public:
 	void update() override;
 private:
 	void drawStars();
+	void drawGhosts();
 	void drawPacMan();
 	void drawMsgs();
 	void draw(Transform *tr, Texture *tex, Vector2D actFrame);

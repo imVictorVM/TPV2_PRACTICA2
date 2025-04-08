@@ -20,7 +20,8 @@ struct ImageWithFrames;
 // Groups list - must have at least one element
 //
 #define _GRPS_LIST_ \
-	STARS
+	STARS, \
+	GHOSTS
 
 // Handlers list - must have at least one element
 //
@@ -34,11 +35,13 @@ class RenderSystem;
 class PacManSystem;
 class GameCtrlSystem;
 class CollisionsSystem;
+class GhostSystem;
 
 #define _SYS_LIST_ \
     FoodSystem, \
 	RenderSystem, \
 	PacManSystem, \
 	GameCtrlSystem, \
-	CollisionsSystem
+	CollisionsSystem, \
+	GhostSystem
 

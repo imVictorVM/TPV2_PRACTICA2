@@ -46,6 +46,7 @@ public:
 	ecs::System* getPacmanSys() { return _pacmanSys; }
 	ecs::System* getgameCtrlSys() { return _gameCtrlSys; }
 	ecs::System* getFoodSys() { return _foodSys; }
+	ecs::System* getGhostsSys() { return _ghostsSys; }
 	ecs::System* getrenderSys() { return _renderSys; }
 	ecs::System* getcollisionSys() { return _collisionSys; }
 	
@@ -55,7 +56,8 @@ private:
 	//SISTEMAS
 	ecs::System *_pacmanSys;
 	ecs::System *_gameCtrlSys;
-	ecs::System * _foodSys;
+	ecs::System* _ghostsSys;
+	ecs::System *_foodSys;
 	ecs::System *_renderSys;
 	ecs::System *_collisionSys;
 	//ESTADOS

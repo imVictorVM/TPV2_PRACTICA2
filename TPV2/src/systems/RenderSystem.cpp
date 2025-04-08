@@ -26,12 +26,12 @@ void RenderSystem::update() {
 	drawMsgs();
 	drawStars();
 	drawPacMan();
+	drawGhosts();
 }
 
 void RenderSystem::drawStars() {
 	// draw stars
 	for (auto e : _mngr->getEntities(ecs::grp::STARS)) {
-
 		auto tr = _mngr->getComponent<Transform>(e);
 		auto IWF = _mngr->getComponent<ImageWithFrames>(e);
 		auto tex = IWF->getTexture();
@@ -39,15 +39,24 @@ void RenderSystem::drawStars() {
 	}
 }
 
+void RenderSystem::drawGhosts()
+{
+	// draw ghosts
+	for (auto e : _mngr->getEntities(ecs::grp::GHOSTS)) {
+		auto tr = _mngr->getComponent<Transform>(e);
+		auto IWF = _mngr->getComponent<ImageWithFrames>(e);
+		auto tex = IWF->getTexture();
+		draw(tr, tex, IWF->getActFrame());
+	}
+}
+
 void RenderSystem::drawPacMan() {
+
 	auto e = _mngr->getHandler(ecs::hdlr::PACMAN);
 	auto tr = _mngr->getComponent<Transform>(e);
-	//auto tex = _mngr->getComponent<Image>(e)->_tex;
 	auto IWF = _mngr->getComponent<ImageWithFrames>(e);
 	auto tex = IWF->getTexture();
 	Vector2D actFrame = IWF->getActFrame();
-
-	assert(tex != nullptr);
 	draw(tr,tex,IWF->getActFrame());
 }
 

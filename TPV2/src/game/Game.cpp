@@ -9,8 +9,8 @@
 #include "../systems/GameCtrlSystem.h"
 #include "../systems/PacManSystem.h"
 #include "../systems/RenderSystem.h"
-
 #include "../systems/FoodSystem.h"
+#include "../systems/GhostSystem.h"
 
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
@@ -96,6 +96,7 @@ void Game::initGame()
 	//SYSTEMS
 	_pacmanSys = _mngr->addSystem<PacManSystem>();
 	_foodSys = _mngr->addSystem<FoodSystem>();
+	_ghostsSys = _mngr->addSystem<GhostSystem>(4);
 	_gameCtrlSys = _mngr->addSystem<GameCtrlSystem>();
 	_renderSys = _mngr->addSystem<RenderSystem>();
 	_collisionSys = _mngr->addSystem<CollisionsSystem>();

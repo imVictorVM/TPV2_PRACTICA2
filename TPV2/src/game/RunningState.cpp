@@ -68,6 +68,8 @@ void RunningState::update()
 	Game::Instance()->getPacmanSys()->update();
 	//_startsSys->update();
 	Game::Instance()->getFoodSys()->update();
+	//_ghostsSys->update();
+	Game::Instance()->getGhostsSys()->update();
 	//_gameCtrlSys->update();
 	Game::Instance()->getgameCtrlSys()->update();
 	//_collisionSys->update();
