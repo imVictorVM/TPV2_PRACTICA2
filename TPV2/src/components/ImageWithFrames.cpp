@@ -39,34 +39,6 @@ void ImageWithFrames::initComponent() {
 }
 
 
-/*
- inline void render(const SDL_Rect &src, const SDL_Rect &dest, double angle,
-			const SDL_Point *p = nullptr,
-			SDL_RendererFlip flip = SDL_FLIP_NONE) {
-		assert(_texture != nullptr);
-		SDL_RenderCopyEx(_renderer, _texture, &src, &dest, angle, p, flip);
-	}
-*/
-
-//void ImageWithFrames::update()
-//{
-//	if (_timer + 50 <= sdlutils().virtualTimer().currTime()) {
-//		_timer = sdlutils().virtualTimer().currTime();
-//	
-//		if (_actFrame.getX() + _width < _texWidthMax) {
-//			_actFrame.setX(_actFrame.getX() + _width);
-//		}
-//		else if (_actFrame.getY() + _height < _texHeigthMax) {
-//			_actFrame.setX(0);
-//			_actFrame.setY(_actFrame.getY() + _height);
-//		}
-//		else {
-//			_actFrame.set(0, 0);
-//		}
-//	
-//	}
-//}
-
 void ImageWithFrames::updateImage() {
 
 
@@ -87,4 +59,24 @@ void ImageWithFrames::updateImage() {
 	}
 
 
+}
+
+void ImageWithFrames::resetFramePosition()
+{
+	_actFrame = Vector2D(_initialCol * _width, _initialFil * _height);
+	_actualFrame = 0;
+}
+
+void ImageWithFrames::setCol(int newCol) {
+	_initialCol = newCol;
+	
+	_actFrame.setX(_initialCol * _width);
+	_actualFrame = 0; 
+}
+
+void ImageWithFrames::setFil(int newFil) {
+	_initialFil = newFil;
+	
+	_actFrame.setY(_initialFil * _height);
+	_actualFrame = 0; 
 }

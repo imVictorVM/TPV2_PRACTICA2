@@ -77,7 +77,7 @@ void PacManSystem::update() {
 		_pmTR->_vel.set(0.0f, 0.0f);
 	}
 
-	std::cout << sdlutils().virtualTimer().currTime() << std::endl;
+//	std::cout << sdlutils().virtualTimer().currTime() << std::endl;
 	
 	if (_timer + 100 <= sdlutils().virtualTimer().currTime()) {
 		_timer = sdlutils().virtualTimer().currTime();

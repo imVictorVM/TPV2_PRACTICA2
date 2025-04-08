@@ -27,6 +27,16 @@ public:
 	void initComponent() override;
 	//void update() override;
 	void updateImage();
+
+
+	//fruits necesary methods
+
+	void resetFramePosition();
+	
+	void setCol(int newCol);
+	void setFil(int newFil);
+
+
 private:
 	Transform* _tr;
 	Texture* _tex;

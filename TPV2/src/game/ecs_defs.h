@@ -9,19 +9,22 @@ struct Image;
 struct StarMotion;
 struct Points;
 struct ImageWithFrames;
+struct MiracleFruit;
 
 #define _CMPS_LIST_ \
 	Transform, \
 	Image, \
 	StarMotion, \
 	Points, \
-	ImageWithFrames
+	ImageWithFrames, \
+	MiracleFruit
 
 // Groups list - must have at least one element
 //
 #define _GRPS_LIST_ \
 	STARS, \
-	GHOSTS
+	GHOSTS, \
+	FRUITS
 
 // Handlers list - must have at least one element
 //

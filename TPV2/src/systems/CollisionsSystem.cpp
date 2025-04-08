@@ -46,7 +46,8 @@ void CollisionsSystem::update() {
 					eTR->_pos, eTR->_width, eTR->_height)) {
 
 				Message m;
-				m.id = _m_STAR_EATEN;
+				//m.id = _m_STAR_EATEN;
+				m.id = _m_PACMAN_FOOD_COLLISION;
 				m.star_eaten_data.e = e;
 				_mngr->send(m);
 
