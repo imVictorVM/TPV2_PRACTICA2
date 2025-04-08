@@ -11,7 +11,7 @@
 
 GhostSystem::GhostSystem(int numGhosts) : _pmTR(nullptr), _numGhosts(numGhosts)
 {
-	_ghosts.resize(_numGhosts);
+
 }
 
 GhostSystem::~GhostSystem()
@@ -21,6 +21,7 @@ GhostSystem::~GhostSystem()
 
 void GhostSystem::initSystem()
 {
+	int offset = 0;
 	for (int i = 0; i < _numGhosts; ++i) {
 		auto ghost = _mngr->addEntity(ecs::grp::GHOSTS);
 		_ghosts.push_back(ghost);
@@ -28,20 +29,37 @@ void GhostSystem::initSystem()
 
 		_pmTR = _mngr->addComponent<Transform>(ghost);
 		auto s = 50.0f;
-		auto x = (sdlutils().width() - s) / 2.0f;
-		auto y = (sdlutils().height() - s) / 2.0f;
+		auto x = ((sdlutils().width() - s) + offset) / 2.0f;
+		auto y = ((sdlutils().height() - s) + offset) / 2.0f;
 		_pmTR->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
-		//_mngr->addComponent<Image>(ghost, &sdlutils().images().at("pacman"));
-		_mngr->addComponent<ImageWithFrames>(ghost, &sdlutils().images().at("sprites"), s, s, 0, 4, 1);
+		_mngr->addComponent<ImageWithFrames>(ghost, &sdlutils().images().at("sprites"), s, s, 0, 4, 6);
+		offset += 80;
 	}
+
+	_timer = 0;
 }
 
 void GhostSystem::update()
 {
+
+	auto e = _mngr->getHandler(ecs::hdlr::PACMAN);
+	auto PCTR = _mngr->getComponent<Transform>(e);
+
 	//movimiento hacia el pacman que sea dentro del espacio de juego
 	for (int i = 0; i < _numGhosts; ++i) {
 
+		auto GHTR = _mngr->getComponent<Transform>(_ghosts[i]);
+		GHTR->_vel.set(PCTR->_pos.getX() - GHTR->_pos.getX(), PCTR->_pos.getY() - GHTR->_pos.getY());
+		
+		if (_timer + 100 <= sdlutils().virtualTimer().currTime()) {
+			_timer = sdlutils().virtualTimer().currTime();
+
+			for (int i = 0; i < _numGhosts; ++i) {
+				_mngr->getComponent<ImageWithFrames>(_ghosts[i])->updateImage();
+			}
+		}
 	}
+	
 }
 
 void GhostSystem::killAllGhosts()

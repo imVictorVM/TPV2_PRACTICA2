@@ -23,4 +23,5 @@ private:
 	std::vector<ecs::entity_t> _ghosts;
 	int _numGhosts;
 	Transform* _pmTR;
+	float _timer;
 };
