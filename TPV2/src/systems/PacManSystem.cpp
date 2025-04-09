@@ -169,6 +169,21 @@ void PacManSystem::resetPacmanPosition()
 	_timer = 0;
 }
 
+void PacManSystem::loseRound()
+{
+	auto pac = _mngr->getHandler(ecs::hdlr::PACMAN);
+	auto h = _mngr->getComponent<Health>(pac);
+
+	h->loseLife();
+	if (h->getLives() == 0)
+	{
+		Game::Instance()->setState(Game::GAMEOVER);
+	}
+	else {
+		Game::Instance()->setState(Game::NEWROUND);
+	}
+}
+
 
 
 
@@ -179,11 +194,7 @@ void PacManSystem::recieve(const Message& m)
 		resetPacmanPosition();
 		break;
 	case _m_ROUND_OVER:
-		Game::Instance()->setState(Game::NEWROUND);
-		break;
-	case _m_GAME_OVER: 
-		Game::Instance()->setState(Game::GAMEOVER);
-		break;
+		loseRound();
 	default:
 		break;
 	}

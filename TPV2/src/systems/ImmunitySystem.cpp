@@ -3,7 +3,7 @@
 #include "../components/Health.h"
 #include "../components/Image.h"
 #include "../sdlutils/SDLUtils.h"
-
+#include "GameCtrlSystem.h"
 ImmunitySystem::ImmunitySystem() {
     // Inicialización básica
 }
@@ -63,8 +63,7 @@ void ImmunitySystem::startImmunity(ecs::entity_t pacman) {
         */
     }
     std::cout << "message received" << std::endl;
-    // Reproducir sonido
-  //  sdlutils().soundEffects().at("immunity_start").play();
+
 }
 
 void ImmunitySystem::endImmunity(ecs::entity_t pacman) {
@@ -83,6 +82,5 @@ void ImmunitySystem::endImmunity(ecs::entity_t pacman) {
     m.id = _m_IMMUNITY_END;
     _mngr->send(m);
 
-    // Reproducir sonido
-    sdlutils().soundEffects().at("immunity_end").play();
+
 }

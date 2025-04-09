@@ -11,6 +11,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
 #include "GameCtrlSystem.h"
+#include "../components/Health.h"
 
 RenderSystem::RenderSystem() {
 
@@ -27,6 +28,7 @@ void RenderSystem::update() {
 	drawStars();
 	drawPacMan();
 	drawGhosts();
+	drawHealth();
 }
 
 void RenderSystem::drawStars() {
@@ -79,6 +81,27 @@ void RenderSystem::drawMsgs() {
 
 	// draw add stars message
 	sdlutils().msgs().at("addstars").render(10, 10);
+
+}
+
+void RenderSystem::drawHealth()
+{
+	auto e = _mngr->getHandler(ecs::hdlr::PACMAN);
+	auto health = _mngr->getComponent<Health>(e);
+	auto total = health->getLives();
+
+	auto score = _mngr->getSystem<GameCtrlSystem>()->getScore();
+
+
+	//Texture* heart(sdlutils().renderer(), &sdlutils().images().at("heart"));
+	
+	Texture* h = &sdlutils().images().at("heart");
+
+	for (int i = 0; i < total;++i) {
+		//pintar corazones
+		SDL_Rect heart = build_sdlrect(i * 50, 0, 50, 50);
+		h->render(heart, 0.0f);
+	}
 
 }
 
