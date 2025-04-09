@@ -72,7 +72,7 @@ void CollisionsSystem::update() {
 				eTR->_pos, eTR->_width, eTR->_height)) {
 
 				Message m;
-				m.id = _m_GAME_OVER;
+				m.id = _m_ROUND_OVER;
 				_mngr->send(m);
 
 			}

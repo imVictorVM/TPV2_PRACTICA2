@@ -15,6 +15,7 @@ public:
 	void initSystem() override;
 	void update() override;
 	void generateOneGhost();
+	void resetGhosts();
 	//voids para mensajes recibidos
 	void killAllGhosts();
 	//

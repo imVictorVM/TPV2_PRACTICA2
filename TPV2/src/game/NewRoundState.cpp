@@ -10,6 +10,8 @@
 
 #include "../game/ConfigAsteroids.h"
 
+#include "../ecs/Manager.h"
+
 
 
 NewRoundState::NewRoundState() :
@@ -33,12 +35,18 @@ void NewRoundState::leave()
 void NewRoundState::update()
 {
 	auto& inputHandler = ih();
+	//auto pm = Game::Instance()->getManager()->getHandler(ecs::hdlr::PACMAN);
+	//auto _pmTR = Game::Instance()->getManager()->getComponent<Transform>(pm);
+	//
+	//auto pmSys = Game::Instance()->getPacmanSys();
+	//pmSys->resetPacmanPosition(); //No funcional
 
 	if (inputHandler.keyDownEvent() && inputHandler.isKeyDown(SDL_SCANCODE_RETURN)) {
-		//Game::Instance()->getFigtherFacade()->reset_figther();
-		//Game::Instance()->getAsteroidsFacade()->remove_all_asteroids();
-		//ARCHIVO CONFIG PARA EL NUMERO DE ASTEROIDES GENERADOS EN UNA NUEVA RONDA
-		//Game::Instance()->getAsteroidsFacade()->create_asteroids(Game::Instance()->getConfigAsteroids()->numAsteroids());
+		//Mandamos mensaje de reset de posicion de todo
+		Message m;
+		m.id = _m_ROUND_START;
+		Game::Instance()->getManager()->send(m);
+
 		Game::Instance()->setState(Game::RUNNING);
 	}
 

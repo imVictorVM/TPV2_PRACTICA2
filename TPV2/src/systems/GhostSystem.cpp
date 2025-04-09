@@ -164,6 +164,9 @@ void GhostSystem::killAllGhosts()
 	for (int i = 0; i < _numGhosts; ++i) {
 		_mngr->setAlive(_ghosts[i],false);
 	}
+	_ghosts.clear();
+	_ghTR.clear();
+	_numGhosts = 0;
 }
 
 
@@ -173,6 +176,9 @@ void GhostSystem::recieve(const Message& m)
 	switch (m.id) {
 	case _m_IMMUNITY_END: //ACABA LA INMUNIDAD
 		//LLAMADA A FUNCION ESPECIFICA DEL PROPIO SISTEMA
+		break;
+	case _m_ROUND_START:
+		killAllGhosts();
 		break;
 	case _m_ROUND_OVER:
 		//reset de fantasmas

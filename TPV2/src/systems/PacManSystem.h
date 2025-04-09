@@ -17,7 +17,8 @@ public:
 	virtual ~PacManSystem();
 	void initSystem() override;
 	void update() override;
-
+	//metodos por mensajes
+	void resetPacmanPosition();
 
 	void recieve(const Message& m) override;
 private:

@@ -155,17 +155,34 @@ void PacManSystem::update() {
 
 }
 
+void PacManSystem::resetPacmanPosition()
+{
+	assert(_pmTR != nullptr);
+
+	float tam = _pmTR->_width;
+	auto y = (sdlutils().height() - tam) / 2.0f;
+	auto x = (sdlutils().width() - tam) / 2.0f;
+	_pmTR->_pos.set(x,y); //Reseteamos posicion
+	_pmTR->_vel.set(0.0f, 0.0f); //Reseteamos velocidad
+	_pmTR->_rot = 0.0f; //Reseteamos rotacion
+
+	_timer = 0;
+}
+
 
 
 
 void PacManSystem::recieve(const Message& m)
 {
 	switch (m.id) {
-	case _m_GAME_OVER: 
-		Game::Instance()->setState(Game::GAMEOVER);
+	case _m_ROUND_START:
+		resetPacmanPosition();
 		break;
 	case _m_ROUND_OVER:
-		//reset de fantasmas
+		Game::Instance()->setState(Game::NEWROUND);
+		break;
+	case _m_GAME_OVER: 
+		Game::Instance()->setState(Game::GAMEOVER);
 		break;
 	default:
 		break;
