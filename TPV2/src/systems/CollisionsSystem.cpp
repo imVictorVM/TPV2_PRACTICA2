@@ -55,5 +55,29 @@ void CollisionsSystem::update() {
 		}
 	}
 
+	//IMPORTANTE, COMPROBAR SI ESTA CON UNA FRUTA MILAGROSA
+	//IMPORTANTE, SI TIENE TODAVIA VIDAS CAMBIAMOS A NEWROUND, SINO GAMEOVER
+	auto& ghosts = _mngr->getEntities(ecs::grp::GHOSTS);
+	auto m = ghosts.size();
+	for (auto i = 0u; i < m; i++) {
+		auto e = ghosts[i];
+		if (_mngr->isAlive(e)) { //si el fantasma esta vivo
+
+			// transform del fantasma
+			auto eTR = _mngr->getComponent<Transform>(e);
+
+			// comprueba colision con el pacman
+			if (Collisions::collides(			//
+				pTR->_pos, pTR->_width, pTR->_height, //
+				eTR->_pos, eTR->_width, eTR->_height)) {
+
+				Message m;
+				m.id = _m_GAME_OVER;
+				_mngr->send(m);
+
+			}
+		}
+	}
+
 }
 

@@ -9,7 +9,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
 #include "../components/ImageWithFrames.h"
-
+#include "../game/Game.h"
 
 PacManSystem::PacManSystem() :
 		_pmTR(nullptr), _pmIWF(nullptr), _tex(nullptr), _timer(0) {
@@ -150,4 +150,18 @@ void PacManSystem::update() {
 	//	_pmTR->_vel.set(0.0f, 0.0f);
 	//}
 
+}
+
+void PacManSystem::recieve(const Message& m)
+{
+	switch (m.id) {
+	case _m_GAME_OVER: 
+		Game::Instance()->setState(Game::GAMEOVER);
+		break;
+	case _m_ROUND_OVER:
+		//reset de fantasmas
+		break;
+	default:
+		break;
+	}
 }

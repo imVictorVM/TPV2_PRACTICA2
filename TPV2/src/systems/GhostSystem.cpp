@@ -176,6 +176,7 @@ void GhostSystem::recieve(const Message& m)
 		break;
 	case _m_ROUND_OVER:
 		//reset de fantasmas
+		break;
 	default:
 		break;
 	}
