@@ -11,6 +11,7 @@
 #include "../systems/RenderSystem.h"
 #include "../systems/FoodSystem.h"
 #include "../systems/GhostSystem.h"
+#include "../systems/ImmunitySystem.h"
 
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
@@ -28,6 +29,7 @@ Game::Game() :
 		_foodSys(), //
 		_renderSys(), //
 		_collisionSys(), //
+		_immunitySys(),
 		_state(nullptr),
 		_newgame_state(nullptr),
 		_newround_state(nullptr),
@@ -100,7 +102,7 @@ void Game::initGame()
 	_gameCtrlSys = _mngr->addSystem<GameCtrlSystem>();
 	_renderSys = _mngr->addSystem<RenderSystem>();
 	_collisionSys = _mngr->addSystem<CollisionsSystem>();
-
+	_immunitySys = _mngr->addSystem<ImmunitySystem>();
 	_state = _newgame_state;
 	_state->enter();
 }

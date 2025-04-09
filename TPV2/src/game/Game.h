@@ -49,7 +49,8 @@ public:
 	ecs::System* getGhostsSys() { return _ghostsSys; }
 	ecs::System* getrenderSys() { return _renderSys; }
 	ecs::System* getcollisionSys() { return _collisionSys; }
-	
+	ecs::System* getImmunitySys() { return _immunitySys; }
+
 	ecs::Manager* getManager() { return _mngr; }
 private:
 	ecs::Manager *_mngr;
@@ -60,6 +61,7 @@ private:
 	ecs::System *_foodSys;
 	ecs::System *_renderSys;
 	ecs::System *_collisionSys;
+	ecs::System* _immunitySys;
 	//ESTADOS
 	GameState* _state;
 	GameState* _paused_state;

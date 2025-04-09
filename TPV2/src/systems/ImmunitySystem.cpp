@@ -5,15 +5,15 @@
 #include "../sdlutils/SDLUtils.h"
 #include "GameCtrlSystem.h"
 ImmunitySystem::ImmunitySystem() {
-    // Inicialización básica
+    
 }
 
 ImmunitySystem::~ImmunitySystem() {
-    // Limpieza si es necesaria
+   
 }
 
 void ImmunitySystem::initSystem() {
-    // Registro de tipos de mensajes que nos interesan
+    
 }
 
 void ImmunitySystem::update() {
@@ -28,9 +28,9 @@ void ImmunitySystem::update() {
 }
 
 void ImmunitySystem::recieve(const Message& m) {
+    
     switch (m.id) {
     case _m_IMMUNITY_START:
-        std::cout << "message received" << std::endl;
         startImmunity(m.immunity_start_data.pacman);
         break;
 
@@ -47,6 +47,8 @@ void ImmunitySystem::recieve(const Message& m) {
 }
 
 void ImmunitySystem::startImmunity(ecs::entity_t pacman) {
+    
+    std::cout << "message received" << std::endl;
     auto health = _mngr->getComponent<Health>(pacman);
 
     // Activar inmunidad
@@ -62,7 +64,7 @@ void ImmunitySystem::startImmunity(ecs::entity_t pacman) {
         img->resetFramePosition();
         */
     }
-    std::cout << "message received" << std::endl;
+    
 
 }
 
