@@ -10,6 +10,7 @@
 #include "../sdlutils/Texture.h"
 #include "../components/ImageWithFrames.h"
 #include "../game/Game.h"
+#include "../components/Health.h"
 
 PacManSystem::PacManSystem() :
 		_pmTR(nullptr), _pmIWF(nullptr), _tex(nullptr), _timer(0) {
@@ -33,6 +34,8 @@ void PacManSystem::initSystem() {
 
 	_timer = 0;
 	_pmIWF = _mngr->addComponent<ImageWithFrames>(pacman, &sdlutils().images().at("sprites"),s,s,0,0,3);
+
+	_mngr->addComponent<Health>(pacman);
 
 }
 
@@ -151,6 +154,9 @@ void PacManSystem::update() {
 	//}
 
 }
+
+
+
 
 void PacManSystem::recieve(const Message& m)
 {

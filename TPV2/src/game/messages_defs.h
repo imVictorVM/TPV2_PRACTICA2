@@ -41,5 +41,16 @@ struct Message {
 		struct {
 			ecs::entity_t e;
 		} food_collision_data;
+
+		//_m_IMMUNITY_START
+		struct {
+			ecs::entity_t pacman;
+		} immunity_start_data;
+
+		// _m_IMMUNITY_END
+		struct {
+			ecs::entity_t pacman;
+		} immunity_end_data;
 	};
+
 };

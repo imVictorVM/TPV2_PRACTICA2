@@ -10,6 +10,7 @@ struct StarMotion;
 struct Points;
 struct ImageWithFrames;
 struct MiracleFruit;
+struct Health;
 
 #define _CMPS_LIST_ \
 	Transform, \
@@ -17,7 +18,8 @@ struct MiracleFruit;
 	StarMotion, \
 	Points, \
 	ImageWithFrames, \
-	MiracleFruit
+	MiracleFruit, \
+	Health
 
 // Groups list - must have at least one element
 //
@@ -39,6 +41,7 @@ class PacManSystem;
 class GameCtrlSystem;
 class CollisionsSystem;
 class GhostSystem;
+class ImmunitySystem;
 
 #define _SYS_LIST_ \
     FoodSystem, \
@@ -46,5 +49,6 @@ class GhostSystem;
 	PacManSystem, \
 	GameCtrlSystem, \
 	CollisionsSystem, \
-	GhostSystem
+	GhostSystem, \
+	ImmunitySystem
 

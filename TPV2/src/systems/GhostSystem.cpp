@@ -31,7 +31,7 @@ void GhostSystem::initSystem()
 void GhostSystem::update()
 {
 
-	std::cout << "TIME: " << sdlutils().virtualTimer().currTime() << std::endl;
+	//std::cout << "TIME: " << sdlutils().virtualTimer().currTime() << std::endl;
 
 	auto e = _mngr->getHandler(ecs::hdlr::PACMAN);
 	auto _pmTR = _mngr->getComponent<Transform>(e);

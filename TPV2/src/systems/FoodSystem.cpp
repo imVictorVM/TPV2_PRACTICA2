@@ -109,7 +109,9 @@ void FoodSystem::onFoodEaten(ecs::entity_t e) {
         if (mf->isMiracleState()) {
             Message m;
             m.id = _m_IMMUNITY_START;
+            m.immunity_start_data.pacman = _mngr->getHandler(ecs::hdlr::PACMAN);
             _mngr->send(m);
+            std::cout << "miracle comida" << std::endl;
         }
     }
 
