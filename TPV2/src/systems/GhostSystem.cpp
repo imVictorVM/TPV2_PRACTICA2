@@ -25,7 +25,7 @@ GhostSystem::~GhostSystem()
 void GhostSystem::initSystem()
 {
 	//generamos solo un fantasma
-	generateOneGhost();
+	//generateOneGhost();
 }
 
 void GhostSystem::update()
@@ -57,7 +57,7 @@ void GhostSystem::update()
 			}
 
 			//Para que pueda spawnear fuera
-			if (_ghTR[i]->_vel.getX() != 0 && _ghTR[i]->_vel.getY() != 0) {
+			//if (_ghTR[i]->_vel.getX() != 0 && _ghTR[i]->_vel.getY() != 0) {
 				// check left/right borders
 				if (_ghTR[i]->_pos.getX() < 0) {
 					_ghTR[i]->_pos.setX(0.0f);
@@ -79,7 +79,7 @@ void GhostSystem::update()
 					_ghTR[i]->_pos.setY(sdlutils().height() - _ghTR[i]->_height);
 					_ghTR[i]->_vel.setY(_ghTR[i]->_vel.getY() * -1);
 				}
-			}
+			//}
 
 
 			//Actualizando posicion del fantasma
@@ -91,7 +91,11 @@ void GhostSystem::update()
 				_timerAnimation = sdlutils().virtualTimer().currTime();
 
 				for (int i = 0; i < _numGhosts; ++i) {
-					_mngr->getComponent<ImageWithFrames>(_ghosts[i])->updateImage();
+					assert(_ghosts[i] != nullptr);
+					auto img = _mngr->getComponent<ImageWithFrames>(_ghosts[i]);
+					if (img != nullptr) {
+						img->updateImage();
+					}
 				}
 			}
 
@@ -100,7 +104,6 @@ void GhostSystem::update()
 			if (_timerSpawn + 5000 <= sdlutils().virtualTimer().currTime() && _numGhosts < 10) {
 				_timerSpawn = sdlutils().virtualTimer().currTime();
 				generateOneGhost();
-				_numGhosts++;
 			}
 		}
 	}
@@ -109,7 +112,6 @@ void GhostSystem::update()
 	if (_timerSpawn + 5000 <= sdlutils().virtualTimer().currTime() && _numGhosts == 0) {
 		_timerSpawn = sdlutils().virtualTimer().currTime();
 		generateOneGhost();
-		_numGhosts++;
 	}
 
 }
@@ -157,6 +159,20 @@ void GhostSystem::generateOneGhost()
 
 	trGhost->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
 	_mngr->addComponent<ImageWithFrames>(ghost, &sdlutils().images().at("sprites"), s, s, 0, 4, 6);
+
+	_numGhosts++;
+}
+
+void GhostSystem::resetGhosts()
+{
+	// Elimina fantasmas anteriores
+	_ghosts.erase(_ghosts.begin(), _ghosts.end());
+	_ghTR.erase(_ghTR.begin(), _ghTR.end());
+	_numGhosts = 0;
+
+	// Reinicia temporizadores
+	_timerAnimation = sdlutils().virtualTimer().currTime();
+	_timerSpawn = sdlutils().virtualTimer().currTime();
 }
 
 void GhostSystem::killAllGhosts()
@@ -164,9 +180,6 @@ void GhostSystem::killAllGhosts()
 	for (int i = 0; i < _numGhosts; ++i) {
 		_mngr->setAlive(_ghosts[i],false);
 	}
-	_ghosts.clear();
-	_ghTR.clear();
-	_numGhosts = 0;
 }
 
 

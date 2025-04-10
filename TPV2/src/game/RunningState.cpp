@@ -34,6 +34,10 @@ RunningState::~RunningState()
 
 void RunningState::enter()
 {
+	Message m;
+	m.id = _m_CREATE_FOOD;
+	m.create_food_data.n = 5;
+	Game::Instance()->getManager()->send(m);
 }
 
 void RunningState::leave()

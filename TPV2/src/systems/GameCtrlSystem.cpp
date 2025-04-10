@@ -25,10 +25,10 @@ void GameCtrlSystem::update() {
 	if (ihldr.keyDownEvent()) {
 		if (ihldr.isKeyDown(SDL_SCANCODE_SPACE)) {
 
-			Message m;
-			m.id = _m_CREATE_STARS;
-			m.create_stars_data.n = 5;
-			_mngr->send(m);
+			//Message m;
+			//m.id = _m_CREATE_STARS;
+			//m.create_stars_data.n = 5;
+			//_mngr->send(m);
 		}
 	}
 }
@@ -37,7 +37,7 @@ void GameCtrlSystem::recieve(const Message &m) {
 	switch (m.id) {
 	//case _m_STAR_EATEN:
 	  case _m_PACMAN_FOOD_COLLISION:
-		_score += _mngr->getComponent<Points>(m.star_eaten_data.e)->_points;
+		_score += _mngr->getComponent<Points>(m.food_eaten_data.e)->_points;
 		break;
 	default:
 		break;

@@ -132,8 +132,8 @@ void FoodSystem::recieve(const Message& m) {
         onFoodEaten(m.food_collision_data.e);
         break;
    // case _m_ROUND_START:
-    case _m_CREATE_STARS:
-        addFood(m.create_stars_data.n); 
+    case _m_CREATE_FOOD:
+        addFood(m.create_food_data.n); 
         break;
     default:
         break;
