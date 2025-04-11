@@ -21,12 +21,14 @@ GhostSystem::~GhostSystem()
 
 void GhostSystem::initSystem()
 {
+	//Ponemos contadores a 0
+	_numGhosts = 0;
+	_timerAnimation = 0;
+	_timerSpawn = 0;
 }
 
 void GhostSystem::update()
 {
-
-	//std::cout << "TIME: " << sdlutils().virtualTimer().currTime() << std::endl;
 
 	auto e = _mngr->getHandler(ecs::hdlr::PACMAN);
 	auto ghosts = _mngr->getEntities(ecs::grp::GHOSTS);
@@ -83,6 +85,7 @@ void GhostSystem::update()
 	if (_timerSpawn + 5000 <= sdlutils().virtualTimer().currTime() && _numGhosts < 10) {
 		_timerSpawn = sdlutils().virtualTimer().currTime();
 		generateOneGhost();
+		_numGhosts++;
 	}
 
 	//Despues de generar nuestro primer fantasma controlamos su movimiento
@@ -202,8 +205,6 @@ void GhostSystem::generateOneGhost()
 
 	trGhost->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
 	_mngr->addComponent<ImageWithFrames>(ghost, &sdlutils().images().at("sprites"), s, s, 0, 4, 6);
-
-	_numGhosts++;
 }
 
 void GhostSystem::resetGhosts()
@@ -220,6 +221,8 @@ void GhostSystem::killAllGhosts()
 		_mngr->setAlive(e,false);
 	}
 	_numGhosts = 0;
+	_timerAnimation = 0;
+	_timerSpawn = 0;
 }
 
 
