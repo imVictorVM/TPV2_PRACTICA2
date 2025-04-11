@@ -22,9 +22,9 @@ public:
 	//recieve de mensajes, override, recibe un mensaje y ejecuta una función especifica del propio sistema
 	void recieve(const Message& m) override;
 private:
-	std::vector<ecs::entity_t> _ghosts;
+	//std::vector<ecs::entity_t> _ghosts;
 	int _numGhosts;
-	std::vector<Transform*> _ghTR;
+	//std::vector<Transform*> _ghTR;
 	float _timerAnimation;
 	float _timerSpawn;
 };
