@@ -20,6 +20,7 @@ public:
 	//metodos por mensajes
 	void resetPacmanPosition();
 	void loseRound();
+	void resetLives();
 	void recieve(const Message& m) override;
 private:
 	Transform *_pmTR;

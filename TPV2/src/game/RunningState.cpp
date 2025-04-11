@@ -34,10 +34,7 @@ RunningState::~RunningState()
 
 void RunningState::enter()
 {
-	Message m;
-	m.id = _m_CREATE_FOOD;
-	m.create_food_data.n = 5;
-	Game::Instance()->getManager()->send(m);
+	
 }
 
 void RunningState::leave()
@@ -79,6 +76,7 @@ void RunningState::update()
 	//_collisionSys->update();
 	Game::Instance()->getcollisionSys()->update();
 	
+	Game::Instance()->getImmunitySys()->update();
 	//_mngr->refresh();
 	Game::Instance()->getManager()->refresh();
 

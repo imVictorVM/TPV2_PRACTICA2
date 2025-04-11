@@ -6,7 +6,6 @@
 //
 struct Transform;
 struct Image;
-struct StarMotion;
 struct Points;
 struct ImageWithFrames;
 struct MiracleFruit;
@@ -15,7 +14,6 @@ struct Health;
 #define _CMPS_LIST_ \
 	Transform, \
 	Image, \
-	StarMotion, \
 	Points, \
 	ImageWithFrames, \
 	MiracleFruit, \
@@ -24,7 +22,6 @@ struct Health;
 // Groups list - must have at least one element
 //
 #define _GRPS_LIST_ \
-	STARS, \
 	GHOSTS, \
 	FRUITS
 

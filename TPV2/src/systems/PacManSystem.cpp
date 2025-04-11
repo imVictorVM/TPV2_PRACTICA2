@@ -80,78 +80,13 @@ void PacManSystem::update() {
 		_pmTR->_vel.set(0.0f, 0.0f);
 	}
 
-//	std::cout << sdlutils().virtualTimer().currTime() << std::endl;
+
 	
 	if (_timer + 100 <= sdlutils().virtualTimer().currTime()) {
 		_timer = sdlutils().virtualTimer().currTime();
 		_pmIWF->updateImage();
 	}
 
-	//auto &ihldr = ih();
-	//
-	//if (ihldr.keyDownEvent()) {
-	//
-	//	if (ihldr.isKeyDown(SDL_SCANCODE_RIGHT)) { // rotate right
-	//		_pmTR->_rot = _pmTR->_rot + 5.0f;
-	//
-	//		// also rotate the PacMan so it looks in the same
-	//		// direction where it moves
-	//		//
-	//		_pmTR->_vel = _pmTR->_vel.rotate(5.0f);
-	//	} else if (ihldr.isKeyDown(SDL_SCANCODE_LEFT)) { // rotate left
-	//		_pmTR->_rot = _pmTR->_rot - 5.0f;
-	//
-	//		// also rotate the PacMan so it looks in the same
-	//		// direction where it moves
-	//		//
-	//		_pmTR->_vel = _pmTR->_vel.rotate(-5.0f);
-	//	} else if (ihldr.isKeyDown(SDL_SCANCODE_UP)) { // increase speed
-	//
-	//		// add 1.0f to the speed (respecting the limit 3.0f). Recall
-	//		// that speed is the length of the velocity vector
-	//		float speed = std::min(3.0f, _pmTR->_vel.magnitude() + 1.0f);
-	//
-	//		// change the length of velocity vecto to 'speed'. We need
-	//		// '.rotate(rot)' for the case in which the current speed is
-	//		// 0, so we rotate it to the same direction where the PacMan
-	//		// is looking
-	//		//
-	//		_pmTR->_vel = Vector2D(0, -speed).rotate(_pmTR->_rot);
-	//	} else if (ihldr.isKeyDown(SDL_SCANCODE_DOWN)) { // decrease speed
-	//		// subtract 1.0f to the speed (respecting the limit 0.0f). Recall
-	//		// that speed is the length of the velocity vector
-	//		float speed = std::max(0.0f, _pmTR->_vel.magnitude() - 1.0f);
-	//
-	//		// change the length of velocity vector to 'speed'. We need
-	//		// '.rotate(rot)' for the case in which the current speed is
-	//		// 0, so we rotate it to the same direction where the PacMan
-	//		// is looking
-	//		//
-	//		_pmTR->_vel = Vector2D(0, -speed).rotate(_pmTR->_rot);
-	//	}
-	//
-	//}
-	//
-	//// move the pacman
-	//_pmTR->_pos = _pmTR->_pos + _pmTR->_vel;
-	//
-	//// check left/right borders
-	//if (_pmTR->_pos.getX() < 0) {
-	//	_pmTR->_pos.setX(0.0f);
-	//	_pmTR->_vel.set(0.0f, 0.0f);
-	//} else if (_pmTR->_pos.getX() + _pmTR->_width > sdlutils().width()) {
-	//	_pmTR->_pos.setX(sdlutils().width() - _pmTR->_width);
-	//	_pmTR->_vel.set(0.0f, 0.0f);
-	//}
-	//
-	//// check upper/lower borders
-	//if (_pmTR->_pos.getY() < 0) {
-	//	_pmTR->_pos.setY(0.0f);
-	//	_pmTR->_vel.set(0.0f, 0.0f);
-	//} else if (_pmTR->_pos.getY() + _pmTR->_height > sdlutils().height()) {
-	//	_pmTR->_pos.setY(sdlutils().height() - _pmTR->_height);
-	//	_pmTR->_vel.set(0.0f, 0.0f);
-	//}
 
 }
 
@@ -184,6 +119,13 @@ void PacManSystem::loseRound()
 	}
 }
 
+void PacManSystem::resetLives()
+{
+	auto pac = _mngr->getHandler(ecs::hdlr::PACMAN);
+	auto h = _mngr->getComponent<Health>(pac);
+	h->reset();
+}
+
 
 
 
@@ -195,6 +137,10 @@ void PacManSystem::recieve(const Message& m)
 		break;
 	case _m_ROUND_OVER:
 		loseRound();
+		break;
+	case _m_NEW_GAME:
+		resetLives();
+		break;
 	default:
 		break;
 	}

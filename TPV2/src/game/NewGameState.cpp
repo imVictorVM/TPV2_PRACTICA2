@@ -7,7 +7,8 @@
 #include "../sdlutils/SDLUtils.h"
 
 #include "../sdlutils/InputHandler.h"
-#include "../game/ConfigAsteroids.h"
+
+#include "../ecs/Manager.h"
 
 NewGameState::NewGameState() :
 	_msg(sdlutils().msgs().at("NewGameStatePacman")) 
@@ -21,6 +22,9 @@ void NewGameState::enter(){
 }
 
 void NewGameState::leave(){
+	Message m;
+	m.id = _m_NEW_GAME;
+	Game::Instance()->getManager()->send(m);
 }
 
 void NewGameState::update(){
@@ -28,7 +32,6 @@ void NewGameState::update(){
 	auto& inputHandler = ih();
 
 	if (inputHandler.keyDownEvent()) {
-		//Game::Instance()->getFigtherFacade()->reset_lives();
 		Game::Instance()->setState(Game::NEWROUND);
 	}
 

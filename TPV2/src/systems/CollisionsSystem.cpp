@@ -7,7 +7,7 @@
 #include "../utils/Collisions.h"
 #include "StarsSystem.h"
 
-CollisionsSystem::CollisionsSystem() {
+CollisionsSystem::CollisionsSystem() : isMiraclePC(false) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -30,25 +30,25 @@ void CollisionsSystem::update() {
 	// particular case we could use a for-each loop since the list stars is not
 	// modified.
 	//
-	auto &stars = _mngr->getEntities(ecs::grp::STARS);
-	auto n = stars.size();
+	auto &fruits = _mngr->getEntities(ecs::grp::FRUITS);
+	auto n = fruits.size();
 	for (auto i = 0u; i < n; i++) {
-		auto e = stars[i];
-		if (_mngr->isAlive(e)) { // if the star is active (it might have died in this frame)
+		auto f = fruits[i];
+		if (_mngr->isAlive(f)) { // if the fruit is active (it might have died in this frame)
 
-			// the Star's Transform
+			// the Fruit's Transform
 			//
-			auto eTR = _mngr->getComponent<Transform>(e);
+			auto fTR = _mngr->getComponent<Transform>(f);
 
 			// check if PacMan collides with the Star (i.e., eat it)
 			if (Collisions::collides(			//
 					pTR->_pos, pTR->_width, pTR->_height, //
-					eTR->_pos, eTR->_width, eTR->_height)) {
+					fTR->_pos, fTR->_width, fTR->_height)) {
 
 				Message m;
 				//m.id = _m_STAR_EATEN;
 				m.id = _m_PACMAN_FOOD_COLLISION;
-				m.food_eaten_data.e = e;
+				m.food_collision_data.fruit = f;
 				_mngr->send(m);
 
 			}
@@ -70,14 +70,39 @@ void CollisionsSystem::update() {
 			if (Collisions::collides(			//
 				pTR->_pos, pTR->_width, pTR->_height, //
 				eTR->_pos, eTR->_width, eTR->_height)) {
-
-				Message m;
-				m.id = _m_ROUND_OVER;
-				_mngr->send(m);
-
+				if (!isMiraclePC) {
+					Message m;
+					m.id = _m_ROUND_OVER;
+					_mngr->send(m);
+					
+				}
+				else {
+					
+					_mngr->setAlive(e, false);
+				}
 			}
 		}
 	}
 
 }
 
+void CollisionsSystem::changeMiraclePC(bool b)
+{
+	isMiraclePC = b;
+}
+
+void CollisionsSystem::recieve(const Message& m)
+{
+	switch (m.id) {
+	case _m_IMMUNITY_START:
+		changeMiraclePC(true);
+		break;
+	case _m_IMMUNITY_END:
+		std::cout << "asfafasfsafas";
+		changeMiraclePC(false);
+		break;
+	default:
+		break;
+	}
+
+}

@@ -4,6 +4,7 @@
 #include "../components/Image.h"
 #include "../sdlutils/SDLUtils.h"
 #include "GameCtrlSystem.h"
+#include "../components/ImageWithFrames.h"
 ImmunitySystem::ImmunitySystem() {
     
 }
@@ -23,6 +24,7 @@ void ImmunitySystem::update() {
     // Comprobar tiempo de inmunidad
     if (health->isImmune() &&
         sdlutils().currRealTime() - health->getImmunityStartTime() > 10000) {
+        std::cout << "asfafasfsafas";
         endImmunity(pacman);
     }
 }
@@ -33,15 +35,7 @@ void ImmunitySystem::recieve(const Message& m) {
     case _m_IMMUNITY_START:
         startImmunity(m.immunity_start_data.pacman);
         break;
-
-    case _m_ROUND_START:
-    case _m_IMMUNITY_END:
-        // Finalizar inmunidad si estaba activa
-        auto pacman = _mngr->getHandler(ecs::hdlr::PACMAN);
-        auto health = _mngr->getComponent<Health>(pacman);
-        if (health->isImmune()) {
-            endImmunity(pacman);
-        }
+    default:
         break;
     }
 }
@@ -54,15 +48,15 @@ void ImmunitySystem::startImmunity(ecs::entity_t pacman) {
     // Activar inmunidad
     health->activateImmunity(sdlutils().currRealTime());
 
-    // Cambiar apariencia de fantasmas (ejemplo)
+    // Cambiar apariencia de fantasmas
     auto ghosts = _mngr->getEntities(ecs::grp::GHOSTS);
     for (auto g : ghosts) {
 
-     /*   auto img = _mngr->getComponent<ImageWithFrames>(g);
-        img->setCol(7);
-        img->setFil(1);
+        auto img = _mngr->getComponent<ImageWithFrames>(g);
+        
+        img->setCol(0);
+        img->setFil(6);    
         img->resetFramePosition();
-        */
     }
     
 
@@ -75,8 +69,11 @@ void ImmunitySystem::endImmunity(ecs::entity_t pacman) {
     // Restaurar apariencia de fantasmas
     auto ghosts = _mngr->getEntities(ecs::grp::GHOSTS);
     for (auto g : ghosts) {
-        auto img = _mngr->getComponent<Image>(g);
-     //   img->setTexture(&sdlutils().images().at("ghost_red"));
+        auto img = _mngr->getComponent<ImageWithFrames>(g);
+        
+        img->setCol(0);
+        img->setFil(4);
+        img->resetFramePosition();
     }
 
     // Enviar mensaje de fin de inmunidad

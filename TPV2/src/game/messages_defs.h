@@ -6,8 +6,6 @@
 
 using msgId_type = uint8_t;
 enum msgId : msgId_type {
-	_m_FOOD_EATEN, //
-	_m_CREATE_FOOD, //
 	_m_NEW_GAME,
 	_m_ROUND_START,
 	_m_ROUND_OVER,
@@ -27,19 +25,11 @@ struct Message {
 
 	union {
 
-		// _m_FOOD_EATEN
-		struct {
-			ecs::entity_t e;
-		} food_eaten_data;
-
-		// _m_CREATE_FOOD
-		struct {
-			unsigned int n;
-		} create_food_data;
+		
 
 		// _m_PACMAN_FOOD_COLLISION
 		struct {
-			ecs::entity_t e;
+			ecs::entity_t fruit;
 		} food_collision_data;
 
 		//_m_IMMUNITY_START
@@ -51,6 +41,12 @@ struct Message {
 		struct {
 			ecs::entity_t pacman;
 		} immunity_end_data;
+
+
+		//_m_GAME_OVER
+		struct {
+			bool win;
+		} game_over_data;
 	};
 
 };

@@ -33,7 +33,7 @@ void RenderSystem::update() {
 
 void RenderSystem::drawStars() {
 	// draw stars
-	for (auto e : _mngr->getEntities(ecs::grp::STARS)) {
+	for (auto e : _mngr->getEntities(ecs::grp::FRUITS)) {
 		auto tr = _mngr->getComponent<Transform>(e);
 		auto IWF = _mngr->getComponent<ImageWithFrames>(e);
 		auto tex = IWF->getTexture();
@@ -79,8 +79,7 @@ void RenderSystem::drawMsgs() {
 
 	scoreTex.render(dest);
 
-	// draw add stars message
-	sdlutils().msgs().at("addstars").render(10, 10);
+
 
 }
 
@@ -90,7 +89,6 @@ void RenderSystem::drawHealth()
 	auto health = _mngr->getComponent<Health>(e);
 	auto total = health->getLives();
 
-	auto score = _mngr->getSystem<GameCtrlSystem>()->getScore();
 
 
 	//Texture* heart(sdlutils().renderer(), &sdlutils().images().at("heart"));

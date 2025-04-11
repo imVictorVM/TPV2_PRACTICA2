@@ -1,8 +1,6 @@
 #include "FoodSystem.h"
 #include <algorithm>
 #include <random>
-#include "../components/Image.h"
-#include "../components/Points.h"
 #include "../components/Transform.h"
 #include "../components/MiracleFruit.h" 
 #include "../ecs/Manager.h"
@@ -25,7 +23,7 @@ void FoodSystem::update() {
     auto currentTime = sdlutils().currRealTime();
     auto& rand = sdlutils().rand();
 
-    auto fruits = _mngr->getEntities(ecs::grp::STARS);
+    auto fruits = _mngr->getEntities(ecs::grp::FRUITS);
 
     for (auto e : fruits) {
         if (_mngr->hasComponent<MiracleFruit>(e)) {
@@ -67,14 +65,14 @@ void FoodSystem::update() {
     }
 }
 
-void FoodSystem::addFood(unsigned int n) {
+void FoodSystem::addFood() {
     auto& rand = sdlutils().rand();
 
     for (auto i = 0u; i < 8; ++i) {
         for (auto j = 0u; j < 6; ++j) {
 
             //Add entity to manager
-            auto e = _mngr->addEntity(ecs::grp::STARS);
+            auto e = _mngr->addEntity(ecs::grp::FRUITS);
 
             // Add a transform component
             auto tr = _mngr->addComponent<Transform>(e);
@@ -86,9 +84,6 @@ void FoodSystem::addFood(unsigned int n) {
             // Image component
             _mngr->addComponent<ImageWithFrames>(e, &sdlutils().images().at("sprites"), s, s, 4, 1, 0);
 
-            //Points component
-            auto pts = _mngr->addComponent<Points>(e);
-            pts->_points = 5;
 
             // 10% miracle fruit
             if (rand.nextInt(1, 101) < 10) {
@@ -122,18 +117,57 @@ void FoodSystem::onFoodEaten(ecs::entity_t e) {
     // it will be cancelled
     sdlutils().soundEffects().at("pacman_eat").setVolume(16);
     sdlutils().soundEffects().at("pacman_eat").play(0, 1);
+    std::cout << "comida" << _currNumOfFood << std::endl;
+    if (_currNumOfFood == 0) {
+        Message m;
+        m.id = _m_GAME_OVER;
+        m.game_over_data.win = true;
+        _mngr->send(m);
+    }
+}
+
+void FoodSystem::resetFruits()
+{
+    auto fruits = _mngr->getEntities(ecs::grp::FRUITS);
+    for (auto e : fruits) {
+        _mngr->setAlive(e, false);
+    }
+
+    addFood();
+}
+
+void FoodSystem::resetMiracleFruits()
+{
+    auto currentTime = sdlutils().currRealTime();
+    auto fruits = _mngr->getEntities(ecs::grp::FRUITS);
+
+    for (auto e : fruits) {
+        if (_mngr->hasComponent<MiracleFruit>(e)) {
+            auto mf = _mngr->getComponent<MiracleFruit>(e);
+
+            mf->resetTimers(currentTime);
+
+            // Cambiar imagen a cereza
+            auto img = _mngr->getComponent<ImageWithFrames>(e);
+            img->setCol(4);
+            img->setFil(1);
+            img->resetFramePosition();
+           
+        }
+    }
 }
 
 
 void FoodSystem::recieve(const Message& m) {
     switch (m.id) {
     case _m_PACMAN_FOOD_COLLISION:
-   // case _m_STAR_EATEN:
-        onFoodEaten(m.food_collision_data.e);
+        onFoodEaten(m.food_collision_data.fruit);
         break;
-   // case _m_ROUND_START:
-    case _m_CREATE_FOOD:
-        addFood(m.create_food_data.n); 
+    case _m_NEW_GAME:
+        resetFruits();
+        break;
+    case _m_ROUND_START:
+        resetMiracleFruits();
         break;
     default:
         break;

@@ -87,7 +87,7 @@ void GhostSystem::update()
 
 
 			//Actualizando frames de animacion
-			if (_timerAnimation + 100 <= sdlutils().virtualTimer().currTime()) {
+	/*		if (_timerAnimation + 100 <= sdlutils().virtualTimer().currTime()) {
 				_timerAnimation = sdlutils().virtualTimer().currTime();
 
 				for (int i = 0; i < _numGhosts; ++i) {
@@ -98,7 +98,7 @@ void GhostSystem::update()
 					}
 				}
 			}
-
+*/
 			//IMPORTANTE, NO GENERAR SI HAY INMUNIDAD
 			//Tiempo de spawn y que el numero de fantasmas sea como maximo 10 para generar uno nuevo
 			if (_timerSpawn + 5000 <= sdlutils().virtualTimer().currTime() && _numGhosts < 10) {

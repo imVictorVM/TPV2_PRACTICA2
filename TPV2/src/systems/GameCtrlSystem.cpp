@@ -6,6 +6,9 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "StarsSystem.h"
+
+#include "../game/Game.h"
+
 GameCtrlSystem::GameCtrlSystem() :
 		_score() {
 	// TODO Auto-generated constructor stub
@@ -20,25 +23,17 @@ void GameCtrlSystem::initSystem() {
 }
 
 void GameCtrlSystem::update() {
-	auto &ihldr = ih();
 
-	if (ihldr.keyDownEvent()) {
-		if (ihldr.isKeyDown(SDL_SCANCODE_SPACE)) {
-
-			//Message m;
-			//m.id = _m_CREATE_STARS;
-			//m.create_stars_data.n = 5;
-			//_mngr->send(m);
-		}
-	}
 }
 
 void GameCtrlSystem::recieve(const Message &m) {
 	switch (m.id) {
 	//case _m_STAR_EATEN:
 	  case _m_PACMAN_FOOD_COLLISION:
-		_score += _mngr->getComponent<Points>(m.food_eaten_data.e)->_points;
 		break;
+	  case _m_GAME_OVER:
+		  Game::Instance()->setState(Game::GAMEOVER);
+		  break;
 	default:
 		break;
 	}

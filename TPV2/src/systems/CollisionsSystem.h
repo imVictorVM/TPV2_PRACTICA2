@@ -11,5 +11,10 @@ public:
 	void initSystem() override;
 	void update() override;
 
+	void recieve(const Message& m) override;
+
+	void changeMiraclePC(bool b);
+private:
+	bool isMiraclePC;
 };
 

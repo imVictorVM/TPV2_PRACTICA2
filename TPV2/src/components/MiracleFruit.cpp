@@ -31,4 +31,5 @@ void MiracleFruit::toggleState() {
 void MiracleFruit::resetTimers(float currentTime) {
     lastStateChange_ = currentTime;
     timeInState_ = 0.0f;
+
 }
