@@ -25,7 +25,6 @@
 
 RunningState::RunningState()
 {
-	_timer = 0;
 }
 
 RunningState::~RunningState()
@@ -34,7 +33,6 @@ RunningState::~RunningState()
 
 void RunningState::enter()
 {
-	
 }
 
 void RunningState::leave()
@@ -88,17 +86,14 @@ void RunningState::update()
 	sdlutils().presentRenderer();
 
 	//manager->update();
-
 	//auto shipPos = manager->getComponent<Transform>(ship)->getPos();
 	//auto shipWidth = manager->getComponent<Transform>(ship)->getWidth();
 	//auto shipHeight = manager->getComponent<Transform>(ship)->getHeight();
 	//auto shipRot = manager->getComponent<Transform>(ship)->getRot();
-
 	//COLISIONES
-	/*const Vector2D &o1Pos, float o1Width,
-		float o1Height, float o1Rot, const Vector2D &o2Pos, float o2Width,
-		float o2Height, float o2Rot*/
-
+	//const Vector2D &o1Pos, float o1Width,
+	//	float o1Height, float o1Rot, const Vector2D &o2Pos, float o2Width,
+	//	float o2Height, float o2Rot
 	//for (int i = 0; i < manager->getEntities(ecs::grp::ASTEROIDS).size(); ++i) {
 	//	auto asteroid = manager->getEntities(ecs::grp::ASTEROIDS)[i];
 	//	auto astPos = manager->getComponent<Transform>(asteroid)->getPos();
@@ -125,20 +120,14 @@ void RunningState::update()
 	//
 	//
 	//}
-
 	//manager->render();
-
 	//manager->refresh();
-
 	//GENERACION DE ASTEROIDE CADA 5 SEGS
 	//ARCHIVO CONFIG PARA EL TIEMPO DE ESPERA A GENERAR UN NUEVO ASTEROIDE
 	//if (_timer + Game::Instance()->getConfigAsteroids()->frequencyAsteroids() <= sdlutils().virtualTimer().currTime()) {
 	//	_timer = sdlutils().virtualTimer().currTime();
 	//	Game::Instance()->getAsteroidsFacade()->create_asteroids(1);
 	//}
-
 	//sdlutils().presentRenderer();
-
-
 
 }

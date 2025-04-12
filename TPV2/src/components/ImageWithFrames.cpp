@@ -43,14 +43,14 @@ void ImageWithFrames::updateImage() {
 
 
 	if (_actualFrame < _numFrames) {
-		if (_actFrame.getX() + _width < _texWidthMax) {
+		if (_actFrame.getX() + _width <= _texWidthMax) {
 			if (!_reverseAnimation) _actFrame.setX(_actFrame.getX() + _width);
 			else _actFrame.setX(_actFrame.getX() - _width);
 		}
-		else if (_actFrame.getY() + _height < _texHeigthMax) {
-			_actFrame.setX(0);
-			_actFrame.setY(_actFrame.getY() + _height);
-		}
+		//else if (_actFrame.getY() + _height <= _texHeigthMax) {
+		//	_actFrame.setX(0);
+		//	_actFrame.setY(_actFrame.getY() + _height);
+		//}
 		_actualFrame++;
 	}
 	else {
@@ -63,20 +63,15 @@ void ImageWithFrames::updateImage() {
 
 void ImageWithFrames::resetFramePosition()
 {
-	_actFrame = Vector2D(_initialCol * _width, _initialFil * _height);
+	_actFrame.set(_initialFil * _width, _initialCol * _height);
+	_reverseAnimation = false;
 	_actualFrame = 0;
 }
 
 void ImageWithFrames::setCol(int newCol) {
 	_initialCol = newCol;
-	
-	_actFrame.setX(_initialCol * _width);
-	_actualFrame = 0; 
 }
 
 void ImageWithFrames::setFil(int newFil) {
 	_initialFil = newFil;
-	
-	_actFrame.setY(_initialFil * _height);
-	_actualFrame = 0; 
 }

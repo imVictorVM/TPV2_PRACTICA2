@@ -6,6 +6,7 @@
 #include "../ecs/Manager.h"
 #include "../utils/Collisions.h"
 #include "StarsSystem.h"
+#include "../components/Health.h"
 
 CollisionsSystem::CollisionsSystem() : isMiraclePC(false) {
 	// TODO Auto-generated constructor stub
@@ -55,8 +56,6 @@ void CollisionsSystem::update() {
 		}
 	}
 
-	//IMPORTANTE, COMPROBAR SI ESTA CON UNA FRUTA MILAGROSA
-	//IMPORTANTE, SI TIENE TODAVIA VIDAS CAMBIAMOS A NEWROUND, SINO GAMEOVER
 	auto& ghosts = _mngr->getEntities(ecs::grp::GHOSTS);
 	auto m = ghosts.size();
 	for (auto i = 0u; i < m; i++) {
@@ -70,16 +69,25 @@ void CollisionsSystem::update() {
 			if (Collisions::collides(			//
 				pTR->_pos, pTR->_width, pTR->_height, //
 				eTR->_pos, eTR->_width, eTR->_height)) {
-				if (!isMiraclePC) {
-					Message m;
-					m.id = _m_ROUND_OVER;
-					_mngr->send(m);
-					
+
+				if (!isMiraclePC) { //En caso de ser un pacman normal
+					auto pmHealth = _mngr->getComponent<Health>(pm);
+					if (pmHealth->getLives() > 0) { //Todavia tiene mas de 1 vida
+						Message m;
+						m.id = _m_ROUND_OVER;
+						_mngr->send(m);
+					}
+					else { // Tiene 0 vidas
+						Message m;
+						m.id = _m_GAME_OVER;
+						m.game_over_data.win = false;
+						_mngr->send(m);
+					}
 				}
-				else {
-					
-					_mngr->setAlive(e, false);
+				else { //En caso de ser un pacman milagroso, matamos al fantasma
+					_mngr->setAlive(e, false); 
 				}
+
 			}
 		}
 	}

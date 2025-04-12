@@ -23,7 +23,7 @@ void ImmunitySystem::update() {
 
     // Comprobar tiempo de inmunidad
     if (health->isImmune() &&
-        sdlutils().currRealTime() - health->getImmunityStartTime() > 10000) {
+        sdlutils().virtualTimer().currRealTime() - health->getImmunityStartTime() > 10000) {
         std::cout << "asfafasfsafas";
         endImmunity(pacman);
     }
@@ -46,35 +46,13 @@ void ImmunitySystem::startImmunity(ecs::entity_t pacman) {
     auto health = _mngr->getComponent<Health>(pacman);
 
     // Activar inmunidad
-    health->activateImmunity(sdlutils().currRealTime());
-
-    // Cambiar apariencia de fantasmas
-    auto ghosts = _mngr->getEntities(ecs::grp::GHOSTS);
-    for (auto g : ghosts) {
-
-        auto img = _mngr->getComponent<ImageWithFrames>(g);
-        
-        img->setCol(0);
-        img->setFil(6);    
-        img->resetFramePosition();
-    }
-    
+    health->activateImmunity(sdlutils().virtualTimer().currRealTime());
 
 }
 
 void ImmunitySystem::endImmunity(ecs::entity_t pacman) {
     auto health = _mngr->getComponent<Health>(pacman);
     health->deactivateImmunity();
-
-    // Restaurar apariencia de fantasmas
-    auto ghosts = _mngr->getEntities(ecs::grp::GHOSTS);
-    for (auto g : ghosts) {
-        auto img = _mngr->getComponent<ImageWithFrames>(g);
-        
-        img->setCol(0);
-        img->setFil(4);
-        img->resetFramePosition();
-    }
 
     // Enviar mensaje de fin de inmunidad
     Message m;

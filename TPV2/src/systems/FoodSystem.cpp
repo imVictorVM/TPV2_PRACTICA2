@@ -49,15 +49,15 @@ void FoodSystem::update() {
 
                     // Cambiar imagen a pera
                     auto img = _mngr->getComponent<ImageWithFrames>(e);
-                    img->setCol(7);
-                    img->setFil(1);
+                    img->setFil(7);
+                    img->setCol(1);
                     img->resetFramePosition();
                 }
                 else {
                     // Cambiar imagen a cereza
                     auto img = _mngr->getComponent<ImageWithFrames>(e);
-                    img->setCol(4);
-                    img->setFil(1);
+                    img->setFil(4);
+                    img->setCol(1);
                     img->resetFramePosition();
                 }
             }
@@ -149,8 +149,8 @@ void FoodSystem::resetMiracleFruits()
 
             // Cambiar imagen a cereza
             auto img = _mngr->getComponent<ImageWithFrames>(e);
-            img->setCol(4);
-            img->setFil(1);
+            img->setFil(4);
+            img->setCol(1);
             img->resetFramePosition();
            
         }

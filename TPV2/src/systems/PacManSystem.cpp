@@ -108,21 +108,15 @@ void PacManSystem::loseRound()
 {
 	auto pac = _mngr->getHandler(ecs::hdlr::PACMAN);
 	auto h = _mngr->getComponent<Health>(pac);
-
+	//Perdemos una vida
 	h->loseLife();
-	if (h->getLives() == 0)
-	{
-		Game::Instance()->setState(Game::GAMEOVER);
-	}
-	else {
-		Game::Instance()->setState(Game::NEWROUND);
-	}
 }
 
 void PacManSystem::resetLives()
 {
 	auto pac = _mngr->getHandler(ecs::hdlr::PACMAN);
 	auto h = _mngr->getComponent<Health>(pac);
+	//Reseteamos las vidas del pacman
 	h->reset();
 }
 
@@ -137,6 +131,7 @@ void PacManSystem::recieve(const Message& m)
 		break;
 	case _m_ROUND_OVER:
 		loseRound();
+		Game::Instance()->setState(Game::NEWROUND);
 		break;
 	case _m_NEW_GAME:
 		resetLives();

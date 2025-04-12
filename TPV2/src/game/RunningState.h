@@ -7,6 +7,4 @@ public:
 	void enter() override;
 	void leave() override;
 	void update() override;
-private:
-	float _timer;
 };

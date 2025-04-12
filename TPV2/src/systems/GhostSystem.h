@@ -18,6 +18,8 @@ public:
 	void resetGhosts();
 	//voids para mensajes recibidos
 	void killAllGhosts();
+	void immunityGhosts();
+	void notimmunityGhosts();
 	//
 	//recieve de mensajes, override, recibe un mensaje y ejecuta una función especifica del propio sistema
 	void recieve(const Message& m) override;
@@ -25,4 +27,5 @@ private:
 	int _numGhosts;
 	float _timerAnimation;
 	float _timerSpawn;
+	bool _immunityPacman;
 };

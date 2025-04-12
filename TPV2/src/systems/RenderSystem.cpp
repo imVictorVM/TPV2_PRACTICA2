@@ -58,7 +58,6 @@ void RenderSystem::drawPacMan() {
 	auto tr = _mngr->getComponent<Transform>(e);
 	auto IWF = _mngr->getComponent<ImageWithFrames>(e);
 	auto tex = IWF->getTexture();
-	Vector2D actFrame = IWF->getActFrame();
 	draw(tr,tex,IWF->getActFrame());
 }
 

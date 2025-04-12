@@ -17,12 +17,6 @@ GameOverState::~GameOverState()
 
 void GameOverState::enter()
 {
-
-	//if (Game::Instance()->getManager()->getEntities(ecs::grp::ASTEROIDS).size() == 0) {
-	//	win = true;
-	//}
-	//else win = false;
-
 }
 
 void GameOverState::leave()

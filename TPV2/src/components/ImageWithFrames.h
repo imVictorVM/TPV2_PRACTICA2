@@ -16,6 +16,10 @@ public:
 		_tex = tex;
 	}
 
+	void setNumFrames(int numFrames) {
+		_numFrames = numFrames;
+	}
+
 	Texture* getTexture() {
 		return _tex;
 	}
