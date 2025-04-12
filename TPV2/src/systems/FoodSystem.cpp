@@ -76,9 +76,9 @@ void FoodSystem::addFood() {
 
             // Add a transform component
             auto tr = _mngr->addComponent<Transform>(e);
-            auto s = 50;
-            auto x = (sdlutils().width() / 8 * (i + 1)) - s;
-            auto y = (sdlutils().height() / 6 * (j + 1)) - s;
+            auto s = 30;
+            auto x = (sdlutils().width() / 8 * (i + 1)) - (s*2);
+            auto y = (sdlutils().height() / 6 * (j + 1)) - (s*2);
             tr->init(Vector2D(x, y), Vector2D(), s, s, 0.0f);
 
             // Image component

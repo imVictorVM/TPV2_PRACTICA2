@@ -96,7 +96,7 @@ void RenderSystem::drawHealth()
 
 	for (int i = 0; i < total;++i) {
 		//pintar corazones
-		SDL_Rect heart = build_sdlrect(i * 50, 0, 50, 50);
+		SDL_Rect heart = build_sdlrect(i * 30, 0, 30, 30);
 		h->render(heart, 0.0f);
 	}
 
