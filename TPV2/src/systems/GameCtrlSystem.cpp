@@ -32,7 +32,6 @@ void GameCtrlSystem::recieve(const Message &m) {
 	  case _m_PACMAN_FOOD_COLLISION:
 		break;
 	  case _m_GAME_OVER:
-		  Game::Instance()->setState(Game::GAMEOVER);
 		  break;
 	default:
 		break;

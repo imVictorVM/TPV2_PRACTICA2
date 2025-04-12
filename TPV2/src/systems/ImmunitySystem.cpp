@@ -24,7 +24,6 @@ void ImmunitySystem::update() {
     // Comprobar tiempo de inmunidad
     if (health->isImmune() &&
         sdlutils().virtualTimer().currRealTime() - health->getImmunityStartTime() > 10000) {
-        std::cout << "asfafasfsafas";
         endImmunity(pacman);
     }
 }
@@ -42,7 +41,6 @@ void ImmunitySystem::recieve(const Message& m) {
 
 void ImmunitySystem::startImmunity(ecs::entity_t pacman) {
     
-    std::cout << "message received" << std::endl;
     auto health = _mngr->getComponent<Health>(pacman);
 
     // Activar inmunidad

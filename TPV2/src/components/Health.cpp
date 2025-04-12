@@ -40,7 +40,6 @@ void Health::activateImmunity(uint32_t startTime) {
     if (!_isImmune) {
         _isImmune = true;
         _immunityStartTime = startTime;
-        std::cout << "inmune" << std::endl;
     }
 }
 

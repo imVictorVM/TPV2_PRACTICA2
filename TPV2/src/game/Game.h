@@ -52,6 +52,9 @@ public:
 	ecs::System* getImmunitySys() { return _immunitySys; }
 
 	ecs::Manager* getManager() { return _mngr; }
+
+	bool getVictory() { return _victory; }
+	void setVictory(bool victory) { _victory = victory; }
 private:
 	ecs::Manager *_mngr;
 	//SISTEMAS
@@ -69,6 +72,8 @@ private:
 	GameState* _newgame_state;
 	GameState* _newround_state;
 	GameState* _gameover_state;
+	//CONDICION VICTORIA
+	bool _victory;
 
 };
 

@@ -74,7 +74,7 @@ void CollisionsSystem::update() {
 
 				if (!isMiraclePC) { //En caso de ser un pacman normal
 					auto pmHealth = _mngr->getComponent<Health>(pm);
-					if (pmHealth->getLives() > 0) { //Todavia tiene mas de 1 vida
+					if (pmHealth->getLives() > 1) { //Todavia tiene mas de 1 vida
 						Message m;
 						m.id = _m_ROUND_OVER;
 						_mngr->send(m);
@@ -112,7 +112,6 @@ void CollisionsSystem::recieve(const Message& m)
 		changeMiraclePC(true);
 		break;
 	case _m_IMMUNITY_END:
-		std::cout << "asfafasfsafas";
 		changeMiraclePC(false);
 		break;
 	default:

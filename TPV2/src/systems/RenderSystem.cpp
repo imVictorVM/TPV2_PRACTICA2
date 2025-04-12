@@ -77,9 +77,6 @@ void RenderSystem::drawMsgs() {
 			scoreTex.height());
 
 	scoreTex.render(dest);
-
-
-
 }
 
 void RenderSystem::drawHealth()

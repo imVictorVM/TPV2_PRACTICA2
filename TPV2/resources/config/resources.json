@@ -22,7 +22,9 @@
     { "id" : "NewGameStatePacman", "text" : "Press Any Key to Start a New Game", "font" : "ARIAL24", "color" : "0xff0000ff" },
     { "id" : "NewRoundStatePacman", "text" : "Press Enter to Start a New Round", "font" : "ARIAL24", "color" : "0xff0000ff" },
     { "id" : "PauseStatePacman", "text" : "Press Any Key to Continue", "font" : "ARIAL24", "color" : "0xff0000ff" },
-    { "id" : "GameOverStatePacman", "text" : "GAME OVER", "font" : "ARIAL24", "color" : "0xff0000ff" }
+    { "id" : "GameOverStatePacman", "text" : "GAME OVER", "font" : "ARIAL24", "color" : "0xff0000ff" },
+    { "id" : "GameOverStatePacmanWin", "text" : "YOU WIN", "font" : "ARIAL24", "color" : "0xff0000ff" },
+    { "id" : "GameOverStatePacmanLose", "text" : "YOU LOSE", "font" : "ARIAL24", "color" : "0xff0000ff" }
 
   ],
 

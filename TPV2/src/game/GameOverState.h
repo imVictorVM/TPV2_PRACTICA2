@@ -11,4 +11,8 @@ public:
 	void update() override;
 private:
 	Texture& _msg;
+	Texture& _msgWin;
+	Texture& _msgLose;
+	bool _victory;
+	float _offset;
 };

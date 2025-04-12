@@ -23,18 +23,20 @@
 using ecs::Manager;
 
 Game::Game() :
-		_mngr(), //
-		_pacmanSys(), //
-		_gameCtrlSys(), //
-		_foodSys(), //
-		_renderSys(), //
-		_collisionSys(), //
+		_mngr(),
+		_pacmanSys(),
+		_gameCtrlSys(),
+		_foodSys(),
+		_renderSys(),
+		_collisionSys(),
 		_immunitySys(),
 		_state(nullptr),
 		_newgame_state(nullptr),
 		_newround_state(nullptr),
 		_paused_state(nullptr),
-		_running_state(nullptr){
+		_running_state(nullptr),
+		_victory(false)
+{
 
 }
 

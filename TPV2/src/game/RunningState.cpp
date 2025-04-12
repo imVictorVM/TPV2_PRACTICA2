@@ -42,21 +42,10 @@ void RunningState::leave()
 void RunningState::update()
 {
 
-	//std::cout << sdlutils().virtualTimer().currTime() << std::endl;
 	sdlutils().virtualTimer().regCurrTime();
 
-
 	auto& inputHandler = ih();
-	//auto manager = Game::Instance()->getManager();
-	//auto ship = Game::Instance()->getFigther();
 
-	//if (manager->getEntities(ecs::grp::ASTEROIDS).size() == 0 || 
-	//	manager->getComponent<Health>(ship)->checkLives() == 0) 
-	//{
-	//	Game::Instance()->setState(Game::GAMEOVER);
-	//}
-	//
-	//
 	if (inputHandler.keyDownEvent() && inputHandler.isKeyDown(SDL_SCANCODE_P)) {
 		Game::Instance()->setState(Game::PAUSED);
 	}

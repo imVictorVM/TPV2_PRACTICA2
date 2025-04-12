@@ -110,7 +110,6 @@ void PacManSystem::loseRound()
 	auto h = _mngr->getComponent<Health>(pac);
 	//Perdemos una vida
 	h->loseLife();
-	Game::Instance()->setState(Game::NEWROUND);
 }
 
 void PacManSystem::resetLives()
@@ -137,6 +136,7 @@ void PacManSystem::recieve(const Message& m)
 		break;
 	case _m_ROUND_OVER:
 		loseRound();
+		Game::Instance()->setState(Game::NEWROUND);
 		break;
 	case _m_NEW_GAME:
 		resetLives();
@@ -144,6 +144,8 @@ void PacManSystem::recieve(const Message& m)
 		break;
 	case _m_GAME_OVER:
 		immunityEnd();
+		Game::Instance()->setVictory(m.game_over_data.win);
+		Game::Instance()->setState(Game::GAMEOVER);
 		break;
 	case _m_PACMAN_FOOD_COLLISION:
 		//_score += _mngr->getComponent<Points>(m.food_eaten_data.e)->_points;

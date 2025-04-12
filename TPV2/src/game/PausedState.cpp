@@ -27,7 +27,6 @@ void PausedState::leave()
 
 void PausedState::update()
 {
-	std::cout << sdlutils().virtualTimer().currTime() << std::endl;
 
 	auto& inputHandler = ih();
 

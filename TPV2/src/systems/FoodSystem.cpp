@@ -90,7 +90,6 @@ void FoodSystem::addFood() {
                 auto mf = _mngr->addComponent<MiracleFruit>(e);
                 mf->setNormalDuration(rand.nextInt(10,21)); // 10-20 sec
                 mf->resetTimers(sdlutils().currRealTime());
-                std::cout << "miracle created" << std::endl;
             }
 
             _currNumOfFood++;
@@ -106,7 +105,6 @@ void FoodSystem::onFoodEaten(ecs::entity_t e) {
             m.id = _m_IMMUNITY_START;
             m.immunity_start_data.pacman = _mngr->getHandler(ecs::hdlr::PACMAN);
             _mngr->send(m);
-            std::cout << "miracle comida" << std::endl;
         }
     }
 
@@ -117,7 +115,6 @@ void FoodSystem::onFoodEaten(ecs::entity_t e) {
     // it will be cancelled
     sdlutils().soundEffects().at("pacman_eat").setVolume(16);
     sdlutils().soundEffects().at("pacman_eat").play(0, 1);
-    std::cout << "comida" << _currNumOfFood << std::endl;
     
     if (_currNumOfFood == 0) {
         Message m;
