@@ -5,7 +5,6 @@
 #include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../utils/Collisions.h"
-#include "StarsSystem.h"
 #include "../components/Health.h"
 #include "../sdlutils/SDLUtils.h"
 
