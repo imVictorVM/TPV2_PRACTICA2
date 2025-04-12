@@ -14,7 +14,6 @@
 #include "../components/Transform.h"
 #include "../game/ConfigAsteroids.h"
 #include "../systems/CollisionsSystem.h"
-#include "../systems/GameCtrlSystem.h"
 #include "../systems/PacManSystem.h"
 #include "../systems/RenderSystem.h"
 
@@ -58,11 +57,9 @@ void RunningState::update()
 	Game::Instance()->getFoodSys()->update();
 	//_ghostsSys->update();
 	Game::Instance()->getGhostsSys()->update();
-	//_gameCtrlSys->update();
-	Game::Instance()->getgameCtrlSys()->update();
 	//_collisionSys->update();
 	Game::Instance()->getcollisionSys()->update();
-	
+	//_immunitySys->update();
 	Game::Instance()->getImmunitySys()->update();
 	//_mngr->refresh();
 	Game::Instance()->getManager()->refresh();

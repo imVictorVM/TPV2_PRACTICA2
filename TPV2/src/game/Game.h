@@ -44,7 +44,6 @@ public:
 		_state->enter();
 	}
 	ecs::System* getPacmanSys() { return _pacmanSys; }
-	ecs::System* getgameCtrlSys() { return _gameCtrlSys; }
 	ecs::System* getFoodSys() { return _foodSys; }
 	ecs::System* getGhostsSys() { return _ghostsSys; }
 	ecs::System* getrenderSys() { return _renderSys; }

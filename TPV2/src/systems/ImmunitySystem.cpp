@@ -3,7 +3,6 @@
 #include "../components/Health.h"
 #include "../components/Image.h"
 #include "../sdlutils/SDLUtils.h"
-#include "GameCtrlSystem.h"
 #include "../components/ImageWithFrames.h"
 ImmunitySystem::ImmunitySystem() {
     

@@ -6,7 +6,6 @@
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../systems/CollisionsSystem.h"
-#include "../systems/GameCtrlSystem.h"
 #include "../systems/PacManSystem.h"
 #include "../systems/RenderSystem.h"
 #include "../systems/FoodSystem.h"
@@ -101,7 +100,6 @@ void Game::initGame()
 	_pacmanSys = _mngr->addSystem<PacManSystem>();
 	_foodSys = _mngr->addSystem<FoodSystem>();
 	_ghostsSys = _mngr->addSystem<GhostSystem>();
-	_gameCtrlSys = _mngr->addSystem<GameCtrlSystem>();
 	_renderSys = _mngr->addSystem<RenderSystem>();
 	_collisionSys = _mngr->addSystem<CollisionsSystem>();
 	_immunitySys = _mngr->addSystem<ImmunitySystem>();

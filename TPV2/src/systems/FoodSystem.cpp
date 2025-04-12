@@ -5,7 +5,6 @@
 #include "../components/MiracleFruit.h" 
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
-#include "GameCtrlSystem.h"
 #include "../components/ImageWithFrames.h"
 
 FoodSystem::FoodSystem() : _currNumOfFood(0) {
