@@ -118,10 +118,13 @@ void FoodSystem::onFoodEaten(ecs::entity_t e) {
     sdlutils().soundEffects().at("pacman_eat").setVolume(16);
     sdlutils().soundEffects().at("pacman_eat").play(0, 1);
     std::cout << "comida" << _currNumOfFood << std::endl;
+    
     if (_currNumOfFood == 0) {
         Message m;
         m.id = _m_GAME_OVER;
         m.game_over_data.win = true;
+        sdlutils().soundEffects().at("pacman_won").setVolume(16);
+        sdlutils().soundEffects().at("pacman_won").play(0, 1);
         _mngr->send(m);
     }
 }

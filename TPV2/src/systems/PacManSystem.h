@@ -21,6 +21,8 @@ public:
 	void resetPacmanPosition();
 	void loseRound();
 	void resetLives();
+	void immunityEnd();
+
 	void recieve(const Message& m) override;
 private:
 	Transform *_pmTR;

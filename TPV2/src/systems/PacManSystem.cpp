@@ -110,6 +110,7 @@ void PacManSystem::loseRound()
 	auto h = _mngr->getComponent<Health>(pac);
 	//Perdemos una vida
 	h->loseLife();
+	Game::Instance()->setState(Game::NEWROUND);
 }
 
 void PacManSystem::resetLives()
@@ -120,8 +121,13 @@ void PacManSystem::resetLives()
 	h->reset();
 }
 
-
-
+void PacManSystem::immunityEnd()
+{
+	auto pac = _mngr->getHandler(ecs::hdlr::PACMAN);
+	auto h = _mngr->getComponent<Health>(pac);
+	//Desactivamos inmunidad del pacman para no mantenerla entre partidas
+	h->deactivateImmunity();
+}
 
 void PacManSystem::recieve(const Message& m)
 {
@@ -131,10 +137,12 @@ void PacManSystem::recieve(const Message& m)
 		break;
 	case _m_ROUND_OVER:
 		loseRound();
-		Game::Instance()->setState(Game::NEWROUND);
 		break;
 	case _m_NEW_GAME:
 		resetLives();
+		break;
+	case _m_GAME_OVER:
+		immunityEnd();
 		break;
 	default:
 		break;

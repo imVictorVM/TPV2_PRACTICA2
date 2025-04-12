@@ -19,6 +19,8 @@ NewGameState::~NewGameState(){
 }
 
 void NewGameState::enter(){
+	sdlutils().soundEffects().at("pacman_intro").setVolume(16);
+	sdlutils().soundEffects().at("pacman_intro").play(0, 1);
 }
 
 void NewGameState::leave(){

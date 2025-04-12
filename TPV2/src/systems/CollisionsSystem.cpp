@@ -7,6 +7,7 @@
 #include "../utils/Collisions.h"
 #include "StarsSystem.h"
 #include "../components/Health.h"
+#include "../sdlutils/SDLUtils.h"
 
 CollisionsSystem::CollisionsSystem() : isMiraclePC(false) {
 	// TODO Auto-generated constructor stub
@@ -51,6 +52,7 @@ void CollisionsSystem::update() {
 				m.id = _m_PACMAN_FOOD_COLLISION;
 				m.food_collision_data.fruit = f;
 				_mngr->send(m);
+				sdlutils().musics().at("pacman_chomp").play(0);
 
 			}
 		}
@@ -76,6 +78,8 @@ void CollisionsSystem::update() {
 						Message m;
 						m.id = _m_ROUND_OVER;
 						_mngr->send(m);
+						sdlutils().soundEffects().at("pacman_death").setVolume(16);
+						sdlutils().soundEffects().at("pacman_death").play(0, 1);
 					}
 					else { // Tiene 0 vidas
 						Message m;
@@ -86,6 +90,8 @@ void CollisionsSystem::update() {
 				}
 				else { //En caso de ser un pacman milagroso, matamos al fantasma
 					_mngr->setAlive(e, false); 
+					sdlutils().soundEffects().at("pacman_eat").setVolume(16);
+					sdlutils().soundEffects().at("pacman_eat").play(0, 1);
 				}
 
 			}
