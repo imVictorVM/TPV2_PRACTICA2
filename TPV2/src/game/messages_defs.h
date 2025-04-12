@@ -10,6 +10,7 @@ enum msgId : msgId_type {
 	_m_ROUND_START,
 	_m_ROUND_OVER,
 	_m_GAME_OVER,
+	_m_PACMAN_GHOST_COLLISION, //no usado, collisionSystem maneja directamente los efectos de la colision
 	_m_PACMAN_FOOD_COLLISION,
 	_m_IMMUNITY_START,
 	_m_IMMUNITY_END
