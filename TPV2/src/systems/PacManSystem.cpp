@@ -13,7 +13,7 @@
 #include "../components/Health.h"
 
 PacManSystem::PacManSystem() :
-		_pmTR(nullptr), _pmIWF(nullptr), _tex(nullptr), _timer(0) {
+		_pmTR(nullptr), _pmIWF(nullptr), _tex(nullptr), _timer(0), _score() {
 }
 
 PacManSystem::~PacManSystem() {
@@ -140,9 +140,14 @@ void PacManSystem::recieve(const Message& m)
 		break;
 	case _m_NEW_GAME:
 		resetLives();
+		setScore(0);
 		break;
 	case _m_GAME_OVER:
 		immunityEnd();
+		break;
+	case _m_PACMAN_FOOD_COLLISION:
+		//_score += _mngr->getComponent<Points>(m.food_eaten_data.e)->_points;
+		incrScore(5);
 		break;
 	default:
 		break;

@@ -17,6 +17,7 @@ public:
 	virtual ~PacManSystem();
 	void initSystem() override;
 	void update() override;
+
 	//metodos por mensajes
 	void resetPacmanPosition();
 	void loseRound();
@@ -24,11 +25,25 @@ public:
 	void immunityEnd();
 
 	void recieve(const Message& m) override;
+
+	inline auto getScore() {
+		return _score;
+	}
+
+	inline void setScore(unsigned int score) {
+		_score = score;
+	}
+
+	inline void incrScore(unsigned int n) {
+		_score += n;
+	}
+
 private:
 	Transform *_pmTR;
 	ImageWithFrames* _pmIWF;
 	Texture* _tex;
 	Vector2D _actFrame;
 	float _timer;
+	unsigned int _score;
 };
 

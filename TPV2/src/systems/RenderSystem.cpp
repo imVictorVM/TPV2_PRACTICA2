@@ -10,8 +10,8 @@
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
-#include "GameCtrlSystem.h"
 #include "../components/Health.h"
+#include "PacManSystem.h"
 
 RenderSystem::RenderSystem() {
 
@@ -65,7 +65,7 @@ void RenderSystem::drawPacMan() {
 void RenderSystem::drawMsgs() {
 	// draw the score
 	//
-	auto score = _mngr->getSystem<GameCtrlSystem>()->getScore();
+	auto score = _mngr->getSystem<PacManSystem>()->getScore();
 
 	Texture scoreTex(sdlutils().renderer(), std::to_string(score),
 			sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0x444444ff));
