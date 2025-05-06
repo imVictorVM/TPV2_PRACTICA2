@@ -19,14 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\game\Bullets.cpp" />
-    <ClCompile Include="..\src\game\Fighter.cpp" />
-    <ClCompile Include="..\src\game\Game.cpp" />
-    <ClCompile Include="..\src\game\Networking.cpp" />
-    <ClCompile Include="..\src\game\UDPServer.cpp" />
     <ClCompile Include="..\SRC\json\JSON.cpp" />
     <ClCompile Include="..\SRC\json\JSONValue.cpp" />
     <ClCompile Include="..\SRC\json\json_demo.cpp" />
+    <ClCompile Include="..\SRC\main.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLNetUtils.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLUtils.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLUtilsError.cpp" />
@@ -37,13 +33,6 @@
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\game\Bullets.h" />
-    <ClInclude Include="..\src\game\BulletsManager.h" />
-    <ClInclude Include="..\src\game\Fighter.h" />
-    <ClInclude Include="..\src\game\Game.h" />
-    <ClInclude Include="..\src\game\Networking.h" />
-    <ClInclude Include="..\src\game\netwrok_messages.h" />
-    <ClInclude Include="..\src\game\UDPServer.h" />
     <ClInclude Include="..\SRC\json\JSON.h" />
     <ClInclude Include="..\SRC\json\JSONValue.h" />
     <ClInclude Include="..\SRC\json\json_demo.h" />
